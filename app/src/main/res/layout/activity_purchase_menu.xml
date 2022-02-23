@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="250dp"
+        android:backgroundTint="#ff4500"
+        android:drawableTop="@drawable/ic_baseline_add_24"
+        android:text="add"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        app:startIconTint="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="25sp"
+        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+    <Button
+        android:id="@+id/b2"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="250dp"
+        android:backgroundTint="#ff4500"
+        android:drawableTop="@drawable/ic_baseline_preview_24"
+        android:text="view"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="25sp"
+        app:startIconTint="@color/white"
+        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+    <Button
+        android:id="@+id/b3"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="375dp"
+        android:backgroundTint="#ff4500"
+        android:drawableTop="@drawable/ic_baseline_attach_money_24"
+        android:text="expenses"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="25sp"
+        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+    <Button
+        android:id="@+id/b4"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="375dp"
+        android:backgroundTint="#ff4500"
+        android:drawableTop="@drawable/ic_baseline_add_business_24"
+        android:text="supplier"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="25sp"
+        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+    <TextView
+        android:id="@+id/purchase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="75dp"
+        android:text="Purchase"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        app:srcCompat="@drawable/my_project" />
+</RelativeLayout>
