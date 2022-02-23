@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+    <group android:id="@+id/Modules_group"
+        android:enabled="true">
+    <item
+        android:id="@+id/nav_purchase"
+        android:title="Purchase"
+        android:icon="@drawable/purchase_icon"/>
+
+    <item
+        android:id="@+id/nav_sales"
+        android:title="Sales"
+        android:icon="@drawable/sales_icon"/>
+
+    <item android:id="@+id/nav_Reports"
+        android:title="Reports"
+        android:icon="@drawable/reports_icon"/>
+    </group>
+    <group android:enabled="true"
+        android:id="@+id/Extra_module">
+
+        <item
+            android:id="@+id/nav_suppliers"
+            android:title="Suppliers"
+            android:icon="@drawable/supliers_logo"/>
+
+        <item
+            android:id="@+id/nav_expense"
+            android:title="Expenses"
+            android:icon="@drawable/expense_logo"/>
+
+        <item
+            android:id="@+id/nav_settings"
+            android:title="Settings"
+            android:icon="@drawable/setting_logo"/>
+    </group>
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Logout"
+        android:icon="@drawable/logout_logo"/>
+
+</menu>

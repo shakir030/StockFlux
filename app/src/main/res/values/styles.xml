@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/design_default_color_primary</item>
+        <item name="boxStrokeColor">#ff8300</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+</resources>
