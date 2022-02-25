@@ -7,7 +7,7 @@
     tools:context=".purchase_menu">
 
     <Button
-        android:id="@+id/b1"
+        android:id="@+id/add_purchase_button"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
@@ -24,7 +24,7 @@
         tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
     <Button
-        android:id="@+id/b2"
+        android:id="@+id/view_purchase_button"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="225dp"
@@ -41,7 +41,7 @@
         tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
     <Button
-        android:id="@+id/b3"
+        android:id="@+id/expense_purchase_button"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
@@ -57,7 +57,7 @@
         tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
     <Button
-        android:id="@+id/b4"
+        android:id="@+id/suppplier_purchase_button"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="225dp"

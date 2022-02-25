@@ -41,7 +41,7 @@
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/a1"
+                android:id="@+id/purchase_add_qty"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="395dp"
                 android:layout_height="wrap_content"

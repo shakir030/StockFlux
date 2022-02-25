@@ -10,19 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 
 public class activity_add extends AppCompatActivity {
-   EditText date;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        date = (EditText) findViewById(R.id.a6);
-
+        /*date = (EditText) findViewById(R.id.a6);
         date.addTextChangedListener(new TextWatcher() {
                 private String current = "";
                 private String ddmmyyyy = "DDMMYYYY";
                 private Calendar cal = Calendar.getInstance();
-
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -80,7 +76,7 @@ public class activity_add extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {}
-            });
+            });*/
     }
 
 }
