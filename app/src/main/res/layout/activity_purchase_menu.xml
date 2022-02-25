@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".purchase_menu">
 
     <Button
         android:id="@+id/b1"
@@ -18,10 +17,10 @@
         android:text="add"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        app:startIconTint="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
         app:cornerRadius="25sp"
+        app:startIconTint="@color/white"
         tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
     <Button
@@ -88,5 +87,5 @@
         android:id="@+id/imageView"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        app:srcCompat="@drawable/my_project" />
+        app:srcCompat="@drawable/logo" />
 </RelativeLayout>

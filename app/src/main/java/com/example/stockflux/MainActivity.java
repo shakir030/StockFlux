@@ -49,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(report);
             }
         });
+       Button purchase_button = findViewById(R.id.Purchase_button);
+        purchase_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent purchase = new Intent(MainActivity.this,purchase_menu.class);
+                startActivity(purchase);
+            }
+        });
 
 
 
