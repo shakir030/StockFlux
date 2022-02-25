@@ -38,6 +38,14 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/activity_main_drawer.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/navigation_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/xml/setting.xml" value="0.221875" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/drawable/custom_button.xml" value="0.1975" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_expense.xml" value="0.228125" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_login.xml" value="0.228125" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_main.xml" value="0.228125" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_purchase_menu.xml" value="0.2" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_sales_add.xml" value="0.228125" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_sales_home.xml" value="0.228125" />
+        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_sales_view.xml" value="0.228125" />
       </map>
     </option>
   </component>
