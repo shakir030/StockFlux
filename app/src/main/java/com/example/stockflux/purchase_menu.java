@@ -1,16 +1,11 @@
 package com.example.stockflux;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.stockflux.R;
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class purchase_menu extends AppCompatActivity {
 
@@ -25,6 +20,30 @@ public class purchase_menu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent add = new Intent(purchase_menu.this,activity_add.class);
                 startActivity(add);
+            }
+        });
+        Button b2 = findViewById(R.id.view_purchase_button);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent view_purchase = new Intent(purchase_menu.this,activity_view.class);
+                startActivity(view_purchase);
+            }
+        });
+        Button b3 = findViewById(R.id.expense_purchase_button);
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent expense = new Intent(purchase_menu.this,activity_expense.class);
+                startActivity(expense);
+            }
+        });
+        Button b4 = findViewById(R.id.suppplier_purchase_button);
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent supplier = new Intent(purchase_menu.this,activity_supplier.class);
+                startActivity(supplier);
             }
         });
 

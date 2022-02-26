@@ -49,7 +49,7 @@
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/Name_textfield"
+                android:id="@+id/Name_register_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -61,14 +61,14 @@
                 app:startIconTint="#ff8300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_register"
+                android:id="@+id/email_register_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -80,6 +80,7 @@
                 app:startIconTint="#ff8300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -87,7 +88,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/number_register"
+                android:id="@+id/number_register_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -99,6 +100,7 @@
                 app:startIconTint="#ff8300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/number_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -107,7 +109,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_textfield"
+                android:id="@+id/password_register_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -120,6 +122,7 @@
                 app:startIconTint="#ff8300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="TouchTargetSizeCheck" />
@@ -127,7 +130,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/repassword_textfield"
+                android:id="@+id/repassword_register_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -140,13 +143,14 @@
                 app:startIconTint="#ff8300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/repassword_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/business_textfield"
+                android:id="@+id/business_register_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
@@ -158,12 +162,14 @@
                 app:startIconTint="#ff8300">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/business_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/Register_submit"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"

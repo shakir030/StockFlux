@@ -16,6 +16,15 @@
             android:name=".activity_add"
             android:exported="false" />
         <activity
+            android:name=".activity_view"
+            android:exported="false" />
+        <activity
+            android:name=".activity_expense"
+            android:exported="false" />
+        <activity
+            android:name=".activity_supplier"
+            android:exported="false" />
+        <activity
             android:name=".reports"
             android:exported="false" />
         <activity
