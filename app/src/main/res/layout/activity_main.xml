@@ -84,6 +84,13 @@
                 android:textStyle="bold"
                 android:layout_marginTop="50dp"
                 android:textSize="25sp"/>
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/logout_button"
+                android:text="Log out"
+                android:layout_margin="20dp"
+                android:layout_width="100dp"
+                android:layout_height="50dp" />
         </LinearLayout>
 
     </ScrollView>

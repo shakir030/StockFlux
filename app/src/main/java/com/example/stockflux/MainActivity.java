@@ -1,46 +1,30 @@
 package com.example.stockflux;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavAction;
 
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.Intent;
-import android.location.SettingInjectorService;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.ScrollCaptureTarget;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationView;
-
-import org.w3c.dom.Text;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
+    private Button logout_button;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView register_text = findViewById(R.id.login_user);
-        register_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent register = new Intent(MainActivity.this,Login.class);
-                startActivity(register);
-            }
-        });
+
         Button Reports_Button = findViewById(R.id.Reports_button);
         Reports_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent purchase = new Intent(MainActivity.this,purchase_menu.class);
                 startActivity(purchase);
+            }
+        });
+        logout_button = findViewById(R.id.logout_button);
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MainActivity.this,Login.class));
             }
         });
 
@@ -85,17 +77,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            /*switch(item.getItemId()){
-                case R.id.nav_settings:{
-                    Intent i = new Intent(MainActivity.this,setting.class);
-                    startActivity(i);
-                    break;
-                }
-                case R.id.nav_sales:{
-                    Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-            }*/
             return true;
         }
 
