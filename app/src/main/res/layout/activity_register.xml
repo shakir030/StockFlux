@@ -26,7 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <ImageView
                 android:id="@+id/logo_register"
@@ -118,7 +119,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:hint="Enter Password"
-                app:endIconMode="password_toggle"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#ff8300"
                 app:startIconContentDescription="Password icon"
                 app:startIconDrawable="@drawable/passwordicon"
                 app:startIconTint="#ff8300">
@@ -127,6 +129,7 @@
                     android:id="@+id/password_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     tools:ignore="TouchTargetSizeCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -139,7 +142,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:hint="Re-Enter assword"
-                app:endIconMode="password_toggle"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#ff8300"
                 app:startIconContentDescription="Password icon"
                 app:startIconDrawable="@drawable/passwordicon"
                 app:startIconTint="#ff8300">
@@ -148,6 +152,7 @@
                     android:id="@+id/repassword_register"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 

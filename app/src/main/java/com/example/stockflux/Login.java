@@ -17,24 +17,26 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
-    private TextView register_text;
+    private TextView register_text,forget_password;
     private Button guest_button,sign_in_button;
     private TextInputEditText email_login,password_login;
     private FirebaseAuth fAuth;
+    private FirebaseUser user;
     private ProgressBar progress_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("Login");
-        guest_button = findViewById(R.id.guest_button);
-        guest_button.setOnClickListener(new View.OnClickListener() {
+
+        forget_password = findViewById(R.id.forget_password);
+        forget_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent guest = new Intent(Login.this,MainActivity.class);
-                startActivity(guest);
+                startActivity(new Intent(Login.this,activity_forget_password.class));
             }
         });
         register_text = findViewById(R.id.register_text);
@@ -45,6 +47,12 @@ public class Login extends AppCompatActivity {
                 startActivity(register);
             }
         });
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            startActivity(new Intent(Login.this,MainActivity.class));
+            finish();
+        }
         email_login=findViewById(R.id.email_login_textfield);
         password_login=findViewById(R.id.password_login_textfield);
         progress_login = findViewById(R.id.progress_login);
