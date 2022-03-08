@@ -7,12 +7,11 @@
     tools:context=".product_reports"
     android:stretchColumns="1,2"
     android:layout_margin="20dp">
-    <Button
-        android:id="@+id/crate_pdf"
-        android:text="Create PDF"/>
-    <TableRow android:background="@color/teal_200">
+    <TableRow >
         <TextView android:text="Name of Product"
             android:textSize="20dp"
+            android:layout_width="216dp"
+            android:background="@drawable/table_heading_style"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:padding="10dp"
@@ -21,6 +20,7 @@
         <TextView android:text="Quantity"
             android:textSize="20dp"
             android:textColor="@color/black"
+            android:background="@drawable/table_heading_style"
             android:textStyle="bold"
             android:padding="10dp"
             android:layout_column="2"/>

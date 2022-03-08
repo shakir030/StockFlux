@@ -8,14 +8,17 @@
 
         <TextView android:id="@+id/Product_name"
             android:textSize="18dp"
+            android:layout_width="160dp"
             android:padding="10dp"
             android:gravity="left"
+            android:background="@drawable/table_data_style"
             android:layout_column="1"/>
 
         <TextView android:id="@+id/product_qty"
             android:textSize="18dp"
             android:gravity="center"
             android:padding="10dp"
+            android:background="@drawable/table_data_style"
             android:layout_column="2"/>
     </TableRow>
 
