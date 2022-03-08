@@ -1,15 +1,12 @@
 package com.example.stockflux;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.ClipData;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
 
 import java.util.Objects;
 
@@ -21,14 +18,6 @@ public class Navigation_Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
-        View setting_menu = findViewById(R.id.nav_settings);
-        setting_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Navigation_Menu.this,setting.class);
-                startActivity(i);
-            }
-        });
 
         // drawer layout instance to toggle the menu icon to open
         // drawer and back button to close drawer

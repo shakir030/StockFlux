@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="HardcodedText">
+    tools:showIn="navigation_view">
     <group android:id="@+id/Modules_group"
         android:enabled="true">
     <item
@@ -22,19 +22,14 @@
         android:id="@+id/Extra_module">
 
         <item
-            android:id="@+id/nav_suppliers"
-            android:title="Suppliers"
-            android:icon="@drawable/supliers_logo"/>
-
-        <item
             android:id="@+id/nav_expense"
             android:title="Expenses"
             android:icon="@drawable/expense_logo"/>
-
         <item
-            android:id="@+id/nav_settings"
-            android:title="Settings"
-            android:icon="@drawable/setting_logo"/>
+            android:id="@+id/nav_products_reports"
+            android:title="Product's Reports"
+            android:icon="@drawable/product_reports"/>
+
     </group>
     <item
         android:id="@+id/nav_logout"

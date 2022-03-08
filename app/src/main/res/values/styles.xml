@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.StockFlux">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <item name="colorPrimary">#FF8300</item>
         <item name="boxStrokeColor">#ff8300</item>
         <item name="boxStrokeWidth">2dp</item>

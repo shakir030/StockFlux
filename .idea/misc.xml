@@ -3,46 +3,64 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Projects/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.131" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/button_pressed.xml" value="0.108" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/button_style.xml" value="0.1165" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/buttonstyle.xml" value="0.108" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/emailicon.xml" value="0.2421875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/gradientbutton1.xml" value="0.108" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/gredient_button_style.xml" value="0.108" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/drawable/ic_launcher_background.xml" value="0.131" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/passwordicon.xml" value="0.2421875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/purchase_icon.xml" value="0.108" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/reports_icon.xml" value="0.108" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/sales_icon.xml" value="0.108" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/drawable/table_data_style.xml" value="0.131" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/drawable/table_heading_style.xml" value="0.131" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/drawable/text_border.xml" value="0.1275" />
         <entry key="..\:/Projects/Projects/app/src/main/res/font-v26/dancing_script.xml" value="0.2604166666666667" />
         <entry key="..\:/Projects/Projects/app/src/main/res/font/dancing_script.xml" value="0.2604166666666667" />
         <entry key="..\:/Projects/Projects/app/src/main/res/font/font.xml" value="0.2604166666666667" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout-v28/activity_add.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout-v28/navigation_header.xml" value="0.221875" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_add.xml" value="0.1" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_add.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_expense.xml" value="0.221875" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_expense_sales.xml" value="0.15925925925925927" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_expense_reports.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_expense_sales.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_filled_purchase_view.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_forget_passowrd.xml" value="0.25" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_login.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_main.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_main2.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_make_bill_sales.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_navigation_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_navigation_menu2.xml" value="0.1" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_product_reports.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_expense_reports.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_menu.xml" value="0.221875" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_register.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_reports.xml" value="0.25" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_add.xml" value="0.1" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_add.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_expense_reports.xml" value="0.20416666666666666" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_home.xml" value="0.221875" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_view.xml" value="0.1" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_view.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_setting.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_settting.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_supplier.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_purchase_details.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_purchase_expense.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_sales_details.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_sales_expense.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_view.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/card_purchase_view_design.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/content_navigation_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/header_navigation_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/nav_setting.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/navigation_header.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/product_reports_item_layout.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/activity_main_drawer.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/navigation_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/xml/setting.xml" value="0.221875" />
-        <entry key="..\:/Users/abhishek/StockFlux/app/src/main/res/layout/activity_add.xml" value="0.228125" />
       </map>
     </option>
   </component>

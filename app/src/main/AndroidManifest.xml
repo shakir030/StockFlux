@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.stockflux">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -12,86 +11,133 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StockFlux">
-        <activity
-            android:name=".make_bill_sales"
-            android:exported="false" />
-        <activity
-            android:name=".product_reports"
-            android:exported="false" />
-        <activity
-            android:name=".update_sales_expense"
-            android:exported="false" />
-        <activity
-            android:name=".sales_expense_reports"
-            android:exported="false" />
-        <activity
-            android:name=".update_purchase_expense"
-            android:exported="false" />
-        <activity
-            android:name=".purchase_expense_reports"
-            android:exported="false" />
-        <activity
-            android:name=".expense_reports"
-            android:exported="false" />
-        <activity
-            android:name=".update_sales_details"
-            android:exported="false" />
-        <activity
-            android:name=".update_purchase_details"
-            android:exported="false" />
-        <activity
-            android:name=".activity_sales_home"
-            android:exported="false" />
-        <activity
-            android:name=".activity_expense_sales"
-            android:exported="false" />
-        <activity
-            android:name=".activity_sales_view"
-            android:exported="false" />
-        <activity
-            android:name=".sales_add"
-            android:exported="false" />
-        <activity
-            android:name=".purchase_menu"
-            android:exported="false" />
-        <activity
-            android:name=".activity_add"
-            android:exported="false" />
-        <activity
-            android:name=".activity_view"
-            android:exported="false" />
-        <activity
-            android:name=".activity_expense"
-            android:exported="false" />
-        <activity
-            android:name=".activity_supplier"
-            android:exported="false" />
-        <activity
-            android:name=".reports"
-            android:exported="false" />
-        <activity
-            android:name=".setting"
-            android:exported="false" />
-        <activity
-            android:name=".Navigation_Menu"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".Register"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Register"
+            android:parentActivityName=".Login"/>
         <activity
             android:name=".activity_forget_password"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Forget Password"
+            android:parentActivityName=".Login"/>
         <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="Home"/>
+
+        <activity
+            android:name=".purchase_menu"
+            android:exported="false"
+            android:label="Purchase Menu"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity_add"
+            android:exported="false"
+            android:label="Purchase Add"
+            android:parentActivityName=".purchase_menu"/>
+        <activity
+            android:name=".activity_view"
+            android:exported="false"
+            android:label="Purchase Items View"
+            android:parentActivityName=".purchase_menu"/>
+        <activity
+            android:name=".activity_expense"
+            android:exported="false"
+            android:label="Add Purchase Expenses"
+            android:parentActivityName=".purchase_menu"/>
+        <activity
+            android:name=".update_purchase_details"
+            android:exported="false"
+            android:label="Update Purchase Details"
+            android:parentActivityName=".activity_view"/>
+
+
+        <activity
+            android:name=".activity_sales_home"
+            android:exported="false"
+            android:label="Sales Menu"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".sales_add"
+            android:exported="false"
+            android:parentActivityName=".activity_sales_home"
+            android:label="Add Sales Items"/>
+        <activity
+            android:name=".activity_expense_sales"
+            android:exported="false"
+            android:parentActivityName=".activity_sales_home"
+            android:label="Add Sales Expenses"/>
+        <activity
+            android:name=".activity_sales_view"
+            android:exported="false"
+            android:parentActivityName=".activity_sales_home"
+            android:label="Sales Items View"/>
+        <activity
+            android:name=".update_sales_details"
+            android:exported="false"
+            android:parentActivityName=".activity_sales_view"
+            android:label="Update Sales Details"/>
+        <activity
+            android:name=".make_bill_sales"
+            android:exported="false"
+            android:label="Bill"
+            android:parentActivityName=".activity_sales_view"/>
+
+
+        <activity
+            android:name=".reports"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:label="Reports"/>
+        <activity
+            android:name=".product_reports"
+            android:exported="false"
+            android:parentActivityName=".reports"
+            android:label="Product's Reports"/>
+        <activity
+            android:name=".update_sales_expense"
+            android:exported="false"
+            android:label="Update Sales Expenses"
+            android:parentActivityName=".sales_expense_reports"/>
+        <activity
+            android:name=".sales_expense_reports"
+            android:exported="false"
+            android:label="Sales Expenses View"
+            android:parentActivityName=".expense_reports"/>
+        <activity
+            android:name=".update_purchase_expense"
+            android:exported="false"
+            android:label="Update Purchase Expenses"
+            android:parentActivityName=".purchase_expense_reports"/>
+        <activity
+            android:name=".purchase_expense_reports"
+            android:exported="false"
+            android:parentActivityName=".expense_reports"
+            android:label="Purchase Expenses View"/>
+        <activity
+            android:name=".expense_reports"
+            android:exported="false"
+            android:parentActivityName=".reports"
+            android:label="Expenses Reports"/>
+
+
+        <activity
+            android:name=".Navigation_Menu"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>

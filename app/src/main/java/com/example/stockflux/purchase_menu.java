@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class purchase_menu extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +35,6 @@ public class purchase_menu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent expense = new Intent(purchase_menu.this,activity_expense.class);
                 startActivity(expense);
-            }
-        });
-        Button b4 = findViewById(R.id.suppplier_purchase_button);
-        b4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent supplier = new Intent(purchase_menu.this,activity_supplier.class);
-                startActivity(supplier);
             }
         });
 

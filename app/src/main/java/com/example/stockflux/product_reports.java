@@ -3,7 +3,6 @@ package com.example.stockflux;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 public class product_reports extends AppCompatActivity {
     RecyclerView recycle_view;
     ProgressDialog progress;
-    Button create_pdf;
     ArrayList<model_products_reports> product_list;
     product_reports_adapter adapter;
     FirebaseFirestore fGetProduct;

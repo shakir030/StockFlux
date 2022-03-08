@@ -29,8 +29,8 @@ import java.util.Calendar;
 
 public class activity_sales_view extends AppCompatActivity {
     EditText costumer_name;
-    TextView select_sales_date, data_sales_name, data_sales_id, data_sales_qty,data_sales_per_price,data_sales_date, data_sales_total_price, data_sales_description;
-    Button search_button_sales, select_date_button_sales, delete_data_button_sales, update_data_button_sales, bill_generate_button,continue_button;
+    TextView select_sales_date, data_sales_name, data_sales_id, data_sales_qty, data_sales_per_price, data_sales_date, data_sales_total_price, data_sales_description;
+    Button search_button_sales, select_date_button_sales, delete_data_button_sales, update_data_button_sales, bill_generate_button, continue_button;
     Spinner spinner_list_name_product_sales;
     MaterialCardView card_view_sales;
     DatePickerDialog datePickerDialog;
@@ -174,12 +174,12 @@ public class activity_sales_view extends AppCompatActivity {
                 continue_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent continue_bill = new Intent(activity_sales_view.this,make_bill_sales.class);
-                        continue_bill.putExtra("costumer_name",costumer_name_text);
-                        continue_bill.putExtra("product_name",name);
-                        continue_bill.putExtra("product_qty",qty);
-                        continue_bill.putExtra("product_per_price",per_price);
-                        continue_bill.putExtra("product_total_price",total_price);
+                        Intent continue_bill = new Intent(activity_sales_view.this, make_bill_sales.class);
+                        continue_bill.putExtra("costumer_name", costumer_name_text);
+                        continue_bill.putExtra("product_name", name);
+                        continue_bill.putExtra("product_qty", qty);
+                        continue_bill.putExtra("product_per_price", per_price);
+                        continue_bill.putExtra("product_total_price", total_price);
                         startActivity(continue_bill);
                     }
                 });
@@ -196,124 +196,93 @@ public class activity_sales_view extends AppCompatActivity {
     }
 
 
-        public void querydata(){
-            String date_pick = select_sales_date.getText().toString().trim();
-            String text = spinner_list_name_product_sales.getSelectedItem().toString();
+    public void querydata() {
+        String date_pick = select_sales_date.getText().toString().trim();
+        String text = spinner_list_name_product_sales.getSelectedItem().toString();
 
-            costumer_name.setVisibility(View.GONE);
-            continue_button.setVisibility(View.GONE);
+        costumer_name.setVisibility(View.GONE);
+        continue_button.setVisibility(View.GONE);
 
-            Query query = fSalesView.collection("AddSalesData").whereEqualTo("date", date_pick).whereEqualTo("name", text);
-            query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    StringBuilder builder = new StringBuilder();
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        Toast.makeText(activity_sales_view.this, "no data found", Toast.LENGTH_SHORT).show();
-                        card_view_sales.setVisibility(View.GONE);
-                    } else {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            document_id = documentSnapshot.getId();
-                            model_class_sales_add data_sales_view = documentSnapshot.toObject(model_class_sales_add.class);
-                            String product_name = data_sales_view.getName();
-                            card_view_sales.setVisibility(View.VISIBLE);
-                            data_sales_name.setText(product_name);
+        Query query = fSalesView.collection("AddSalesData").whereEqualTo("date", date_pick).whereEqualTo("name", text);
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                StringBuilder builder = new StringBuilder();
+                if (queryDocumentSnapshots.isEmpty()) {
+                    Toast.makeText(activity_sales_view.this, "no data found", Toast.LENGTH_SHORT).show();
+                    card_view_sales.setVisibility(View.GONE);
+                } else {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        document_id = documentSnapshot.getId();
+                        model_class_sales_add data_sales_view = documentSnapshot.toObject(model_class_sales_add.class);
+                        String product_name = data_sales_view.getName();
+                        card_view_sales.setVisibility(View.VISIBLE);
+                        data_sales_name.setText(product_name);
 
-                            String product_id = data_sales_view.getID();
-                            data_sales_id.setText(product_id);
+                        String product_id = data_sales_view.getID();
+                        data_sales_id.setText(product_id);
 
-                            int product_qty = data_sales_view.getQuantity();
-                            data_sales_qty.setText(String.valueOf(product_qty));
+                        int product_qty = data_sales_view.getQuantity();
+                        data_sales_qty.setText(String.valueOf(product_qty));
 
-                            int product_per_price = data_sales_view.getPer_price();
-                            data_sales_per_price.setText(String.valueOf(product_per_price));
+                        int product_per_price = data_sales_view.getPer_price();
+                        data_sales_per_price.setText(String.valueOf(product_per_price));
 
-                            int product_total_price = data_sales_view.getTotal_Price();
-                            data_sales_total_price.setText(String.valueOf(product_total_price));
-
-
-                            String product_date = data_sales_view.getDate();
-                            data_sales_date.setText(product_date);
+                        int product_total_price = data_sales_view.getTotal_Price();
+                        data_sales_total_price.setText(String.valueOf(product_total_price));
 
 
-                            String product_description = data_sales_view.getDescription();
-                            data_sales_description.setText(product_description);
+                        String product_date = data_sales_view.getDate();
+                        data_sales_date.setText(product_date);
 
-                        }
+
+                        String product_description = data_sales_view.getDescription();
+                        data_sales_description.setText(product_description);
+
                     }
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(activity_sales_view.this, "Enter Both Details", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        public void delete_data (String id)
-        {
-            fSalesView.collection("AddSalesData").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(activity_sales_view.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
-                    card_view_sales.setVisibility(View.GONE);
-                }
-            });
-        }
-        public void update_data(String id)
-        {
-            fSalesView.collection("AddSalesData").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Intent update = new Intent(activity_sales_view.this,update_sales_details.class);
-                    String document_id = id.toString().trim();
-                    String name = data_sales_name.getText().toString().trim();
-                    String sales_id = data_sales_id.getText().toString();
-                    int qty = Integer.parseInt(data_sales_qty.getText().toString());
-                    int per_price = Integer.parseInt(data_sales_per_price.getText().toString());
-                    int total_price = Integer.parseInt(data_sales_total_price.getText().toString().trim());
-                    String date = data_sales_date.getText().toString().trim();
-                    String description = data_sales_description.getText().toString().trim();
-                    update.putExtra("doucmentid",document_id);
-                    update.putExtra("salesname",name);
-                    update.putExtra("salesid",sales_id);
-                    update.putExtra("sales_qty",qty);
-                    update.putExtra("sales_per_price",per_price);
-                    update.putExtra("sales_total_price",total_price);
-                    update.putExtra("salesdate",date);
-                    update.putExtra("salesdescription",description);
-                    startActivity(update);
-                }
-            });
-        }
-
-    /*private void getdata() {
-        db.collection("AddSalesData").document("n9CjsQl75Uc5JyRVmgKL").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                model_class_purchase_add_data data_sales_view = documentSnapshot.toObject(model_class_purchase_add_data.class);
-
-                String sales_name = data_sales_view.getsales_name();
-                data_name.setText(sales_name);
-
-                String sales_id= data_sales_view.getsales_id();
-                data_id.setText(sales_id);
-
-                int sales_qty = data_sales_view.getsales_qty();
-                data_qty.setText(String.valueOf(sales_qty));
-
-                int sales_per_price = data_sales_view.getsales_per_price();
-                data_per_price.setText(String.valueOf(sales_per_price));
-
-                String sales_date= data_sales_view.getsales_date();
-                data_date.setText(sales_date);
-
-                int sales_total_price = data_sales_view.getsales_per_price();
-                data_total_price.setText(String.valueOf(sales_total_price));
-
-                String sales_description= data_sales_view.getsales_description();
-                data_description.setText(sales_description);
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(activity_sales_view.this, "Enter Both Details", Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
+
+    public void delete_data(String id) {
+        fSalesView.collection("AddSalesData").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(activity_sales_view.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
+                card_view_sales.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    public void update_data(String id) {
+        fSalesView.collection("AddSalesData").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Intent update = new Intent(activity_sales_view.this, update_sales_details.class);
+                String document_id = id.toString().trim();
+                String name = data_sales_name.getText().toString().trim();
+                String sales_id = data_sales_id.getText().toString();
+                int qty = Integer.parseInt(data_sales_qty.getText().toString());
+                int per_price = Integer.parseInt(data_sales_per_price.getText().toString());
+                int total_price = Integer.parseInt(data_sales_total_price.getText().toString().trim());
+                String date = data_sales_date.getText().toString().trim();
+                String description = data_sales_description.getText().toString().trim();
+                update.putExtra("doucmentid", document_id);
+                update.putExtra("salesname", name);
+                update.putExtra("salesid", sales_id);
+                update.putExtra("sales_qty", qty);
+                update.putExtra("sales_per_price", per_price);
+                update.putExtra("sales_total_price", total_price);
+                update.putExtra("salesdate", date);
+                update.putExtra("salesdescription", description);
+                startActivity(update);
+            }
+        });
+    }
 }
