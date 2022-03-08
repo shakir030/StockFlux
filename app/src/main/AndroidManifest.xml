@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.stockflux">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StockFlux">
+        <activity
+            android:name=".make_bill_sales"
+            android:exported="false" />
+        <activity
+            android:name=".product_reports"
+            android:exported="false" />
+        <activity
+            android:name=".update_sales_expense"
+            android:exported="false" />
+        <activity
+            android:name=".sales_expense_reports"
+            android:exported="false" />
+        <activity
+            android:name=".update_purchase_expense"
+            android:exported="false" />
+        <activity
+            android:name=".purchase_expense_reports"
+            android:exported="false" />
+        <activity
+            android:name=".expense_reports"
+            android:exported="false" />
+        <activity
+            android:name=".update_sales_details"
+            android:exported="false" />
+        <activity
+            android:name=".update_purchase_details"
+            android:exported="false" />
+        <activity
+            android:name=".activity_sales_home"
+            android:exported="false" />
+        <activity
+            android:name=".activity_expense_sales"
+            android:exported="false" />
+        <activity
+            android:name=".activity_sales_view"
+            android:exported="false" />
+        <activity
+            android:name=".sales_add"
+            android:exported="false" />
         <activity
             android:name=".purchase_menu"
             android:exported="false" />
@@ -35,20 +77,22 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".activity_forget_password"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

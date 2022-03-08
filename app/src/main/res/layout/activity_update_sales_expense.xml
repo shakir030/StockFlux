@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".update_sales_expense">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sales_expense_update_name_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="100dp"
+                android:hint="Product name"
+                app:startIconTint="#ff8300"
+                app:startIconDrawable="@drawable/ic_icons8_product_50">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sales_expense_update_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    tools:ignore="TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sales_expense_update_total_price_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:hint="Total Price "
+                app:startIconTint="#ff8300"
+                android:layout_below="@id/sales_expense_update_name_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sales_expense_update_total_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="20sp"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sales_expense_update_description_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="25dp"
+                android:hint="Description"
+                app:startIconTint="#ff8300"
+                android:layout_below="@id/sales_expense_update_total_price_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sales_expense_update_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    tools:ignore="TextContrastCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/sales_reset_update_button"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sales_expense_update_description_layout"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="@color/black"
+                android:text="Reset"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/sales_submit_update_button"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sales_expense_update_description_layout"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@id/sales_reset_update_button"
+                android:backgroundTint="#04A21E"
+                android:text="Update"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

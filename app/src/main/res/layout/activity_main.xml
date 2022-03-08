@@ -72,6 +72,7 @@
                 android:textStyle="bold"
                 app:cornerRadius="20dp"
                 app:icon="@drawable/sales_icon" />
+
             <Button
                 android:id="@+id/Reports_button"
                 android:layout_width="300dp"

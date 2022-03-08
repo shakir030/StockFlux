@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/Profit_Loss_button"
+                android:layout_above="@id/Expense_reports"
                 android:layout_marginStart="-5dp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="48dp"
@@ -42,29 +42,14 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/Profit_Loss_button"
+                android:id="@+id/Expense_reports"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/Logo_Reports"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#039BE5"
-                android:text="Profit and Loss"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:cornerRadius="20dp" />
-
-            <Button
-                android:id="@+id/Expense_reports"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/Profit_Loss_button"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#039BE5"
@@ -74,35 +59,18 @@
                 app:cornerRadius="20dp" />
 
             <Button
-                android:id="@+id/Bill_Payment"
+                android:id="@+id/Products_reports"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_below="@id/Expense_reports"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#039BE5"
-                android:text="Bill Payments"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:cornerRadius="20dp" />
-
-            <Button
-                android:id="@+id/Bill_issue"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/Bill_Payment"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#039BE5"
-                android:text="Issued Bill"
+                android:text="Product's Reports"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:cornerRadius="20dp" />

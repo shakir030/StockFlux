@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity_sales_view">
-
+    tools:context=".activity_view">
     <TextView
-        android:id="@+id/sales_view_text_date"
+        android:id="@+id/Date_text_view"
         android:layout_width="170dp"
         android:layout_height="65dp"
         android:layout_marginStart="15dp"
@@ -20,12 +19,12 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/date_select_sales_view"
+        android:id="@+id/date_select_view"
         android:layout_width="170dp"
         android:layout_height="65dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_toEndOf="@id/sales_view_text_date"
+        android:layout_toEndOf="@id/Date_text_view"
         android:background="@drawable/text_border"
         android:hint="Select date."
         android:padding="10dp"
@@ -35,10 +34,10 @@
         android:textSize="25sp" />
 
     <Button
-        android:id="@+id/select_sales_date_button"
+        android:id="@+id/select_date_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_select_sales_view"
+        android:layout_below="@id/date_select_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/date_icon"
@@ -46,10 +45,10 @@
         android:text="Select Date" />
 
     <TextView
-        android:id="@+id/sales_name_select_text"
+        android:id="@+id/name_select_text"
         android:layout_width="170dp"
         android:layout_height="65dp"
-        android:layout_below="@id/select_sales_date_button"
+        android:layout_below="@id/select_date_button"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:paddingTop="15dp"
@@ -60,32 +59,31 @@
         android:textStyle="bold" />
 
     <Spinner
-        android:id="@+id/spinner_add_view_sales"
+        android:id="@+id/spinner_add_view_purchase"
         android:layout_width="170dp"
         android:layout_height="65dp"
-        android:layout_below="@id/select_sales_date_button"
+        android:layout_below="@id/select_date_button"
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
-        android:layout_toEndOf="@id/sales_name_select_text"
-        android:contentDescription="Choose Catogry" />
+        android:layout_toEndOf="@id/name_select_text"
+        android:contentDescription="@string/Enter_Catogory" />
 
     <Button
-        android:id="@+id/search_button_sales_view"
+        android:id="@+id/search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sales_name_select_text"
+        android:layout_below="@id/name_select_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/icon_search"
         android:drawableTint="@color/white"
-        android:visibility="gone"
         android:text="Search" />
 
     <TextView
         android:id="@+id/Details_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/search_button_sales_view"
+        android:layout_below="@id/search_button"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -106,12 +104,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_sales_view"
+                android:id="@+id/card"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="@color/teal_200"
+                android:backgroundTint="#E78B6F"
                 android:visibility="gone">
 
                 <RelativeLayout
@@ -120,7 +118,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/sales_view_name"
+                        android:id="@+id/purchase_view_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -131,20 +129,20 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/data_sales_view_name"
+                        android:id="@+id/data_view_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_name"
+                        android:layout_toEndOf="@id/purchase_view_name"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/sales_view_id"
+                        android:id="@+id/purchase_view_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_name"
+                        android:layout_below="@id/purchase_view_name"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:text="ID of Product :- "
@@ -153,72 +151,68 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/data_sales_view_id"
+                        android:id="@+id/data_view_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_name"
+                        android:layout_below="@id/data_view_name"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_id"
+                        android:layout_toEndOf="@id/purchase_view_id"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/sales_view_qty"
+                        android:id="@+id/purchase_view_qty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_id"
+                        android:layout_below="@id/purchase_view_id"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Quantity of Product :- "
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
-
                     <TextView
-                        android:id="@+id/data_sales_view_qty"
+                        android:id="@+id/data_view_qty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_id"
+                        android:layout_below="@id/data_view_id"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_qty"
-                        android:inputType="number"
+                        android:layout_toEndOf="@id/purchase_view_per_price"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/sales_view_per_price"
+                        android:id="@+id/purchase_view_per_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_qty"
+                        android:layout_below="@id/purchase_view_qty"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
+                        android:inputType="number"
                         android:text="Per/Price of Product :- "
                         android:textColor="@color/black"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_per_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_qty"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_qty"
-                        android:inputType="number"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textStyle="bold"
                         tools:ignore="TouchTargetSizeCheck" />
 
-
                     <TextView
-                        android:id="@+id/sales_view_date"
+                        android:id="@+id/data_view_per_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_per_price"
+                        android:layout_below="@id/data_view_qty"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/purchase_view_per_price"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/purchase_view_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/purchase_view_per_price"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Date :- "
@@ -227,21 +221,21 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/data_sales_view_date"
+                        android:id="@+id/data_view_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_per_price"
+                        android:layout_below="@id/data_view_per_price"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_date"
+                        android:layout_toEndOf="@id/purchase_view_date"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/sales_view_total_price"
+                        android:id="@+id/purchase_view_total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_date"
+                        android:layout_below="@id/purchase_view_date"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:text="Total Price of Product :- "
@@ -250,23 +244,23 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/data_sales_view_total_price"
+                        android:id="@+id/data_view_total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_date"
+                        android:layout_below="@id/data_view_date"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_total_price"
+                        android:layout_toEndOf="@id/purchase_view_total_price"
                         android:inputType="number"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <TextView
-                        android:id="@+id/sales_view_description"
+                        android:id="@+id/purchase_view_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_total_price"
+                        android:layout_below="@id/purchase_view_total_price"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
@@ -276,22 +270,22 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/data_sales_view_description"
+                        android:id="@+id/data_view_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_total_price"
+                        android:layout_below="@id/data_view_total_price"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/sales_view_description"
+                        android:layout_toEndOf="@id/purchase_view_description"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <Button
-                        android:id="@+id/delete_sales_data_button"
+                        android:id="@+id/delete_data_button"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
-                        android:layout_below="@id/sales_view_description"
+                        android:layout_below="@id/purchase_view_description"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
@@ -301,26 +295,15 @@
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <Button
-                        android:id="@+id/make_bill"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/sales_view_description"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="55dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/delete_sales_data_button"
-                        android:text="Make Bill" />
-
-                    <Button
-                        android:id="@+id/update_sales_add_button"
+                        android:id="@+id/update_add_button"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
-                        android:layout_below="@id/sales_view_description"
-                        android:layout_marginStart="40dp"
+                        android:layout_below="@id/purchase_view_description"
+                        android:layout_marginStart="252dp"
+                        android:layout_marginLeft="200dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/make_bill"
+                        android:layout_toEndOf="@id/delete_data_button"
                         android:backgroundTint="#04A21E"
                         android:drawableTop="@drawable/edit_icon"
                         android:drawableTint="@color/white"
@@ -328,33 +311,6 @@
 
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <EditText
-                android:id="@+id/costumer_name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/card_sales_view"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:hint="Enter Costomer Name"
-                android:visibility="gone"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/bill_continue"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_below="@id/card_sales_view"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/costumer_name"
-                android:backgroundTint="@color/teal_200"
-                android:drawableTop="@drawable/continue_icon"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/black"
-                android:visibility="gone"
-                app:cornerRadius="100dp"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </RelativeLayout>
     </ScrollView>
 

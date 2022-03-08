@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".make_bill_sales">
+
+    <TextView
+        android:id="@+id/mobile_number_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:textAlignment="viewEnd"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/organisation_name_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mobile_number_layout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/teal_200"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/bill_costumer_layout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/organisation_name_layout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/data_date_bill"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/organisation_name_layout"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@id/bill_costumer_layout"
+        android:textAlignment="viewEnd"
+        android:textSize="15sp" />
+
+    <TableLayout
+        android:id="@+id/bill_table_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bill_costumer_layout"
+        android:layout_margin="10dp"
+        android:stretchColumns="1,2,3,4">
+        <TableRow
+            android:background="@drawable/table_data_style">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:background="@drawable/table_heading_style"
+                android:text="Product Name"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="QTY"
+                android:background="@drawable/table_heading_style"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="PER/Price"
+                android:background="@drawable/table_heading_style"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Total Price"
+                android:background="@drawable/table_heading_style"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+        </TableRow>
+        <TableRow
+            android:background="@drawable/table_data_style">
+            <TextView android:id="@+id/bill_product_name"
+                android:textSize="15sp"
+                android:background="@drawable/table_data_style"
+                android:textAlignment="center" />
+            <TextView android:id="@+id/bill_product_qty"
+                android:textAlignment="center"
+                android:background="@drawable/table_data_style"
+                android:textSize="15sp"/>
+            <TextView android:id="@+id/bill_product_per_price"
+                android:textAlignment="center"
+                android:background="@drawable/table_data_style"
+                android:textSize="15sp"/>
+            <TextView android:id="@+id/bill_product_total_price"
+                android:textSize="15sp"
+                android:background="@drawable/table_data_style"
+                android:textAlignment="viewEnd"/>
+        </TableRow>
+        <TableRow
+            android:background="@drawable/table_data_style">
+            <TextView android:background="@drawable/table_data_style" />
+            <TextView android:background="@drawable/table_data_style"/>
+            <TextView android:background="@drawable/table_data_style"/>
+            <TextView android:background="@drawable/table_data_style"/>
+        </TableRow>
+        <TableRow
+            android:background="@drawable/table_data_style">
+            <TextView android:background="@drawable/table_data_style"/>
+            <TextView android:background="@drawable/table_data_style"/>
+            <TextView android:text="Total"
+                android:background="@drawable/table_data_style"
+                android:paddingEnd="5dp"
+                android:textAlignment="viewEnd"/>
+            <TextView
+                android:id="@+id/total_bill_amount"
+                android:background="@drawable/table_data_style"
+                android:textAlignment="viewEnd"/>
+        </TableRow>
+    </TableLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bill_table_layout"
+        android:text="Thank you for Shopping with us"
+        android:layout_marginTop="40dp"
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

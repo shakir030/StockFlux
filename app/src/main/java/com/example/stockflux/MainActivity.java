@@ -25,7 +25,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
-    private Button logout_button;
+    private Button logout_button,Reports_Button,purchase_button,sales_button;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -36,15 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button Reports_Button = findViewById(R.id.Reports_button);
-        Reports_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent report = new Intent(MainActivity.this,reports.class);
-                startActivity(report);
-            }
-        });
-       Button purchase_button = findViewById(R.id.Purchase_button);
+
+        purchase_button = findViewById(R.id.Purchase_button);
         purchase_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +45,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(purchase);
             }
         });
+
+        sales_button = findViewById(R.id.Sales_button);
+        sales_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,activity_sales_home.class));
+            }
+        });
+
+
+        Reports_Button = findViewById(R.id.Reports_button);
+        Reports_Button.setOnClickListener(new View.OnClickListener() {
+                @Override
+            public void onClick(View view) {
+                Intent report = new Intent(MainActivity.this,reports.class);
+                startActivity(report);
+            }
+        });
+
         logout_button = findViewById(R.id.logout_button);
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override

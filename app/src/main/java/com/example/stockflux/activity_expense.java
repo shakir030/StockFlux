@@ -1,84 +1,146 @@
 package com.example.stockflux;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Calendar;
 
 public class activity_expense extends AppCompatActivity {
-    EditText d;
+    public static final String TAG = "AddPurchaseExpenses";
+    TextInputEditText purchase_expense_name,purchase_expense_total_price,purchase_expense_description;
+    TextView purchase_expense_date;
+    Button purchase_expense_submit,purchase_expense_reset;
+    DatePickerDialog datePickerDialog;
+    FirebaseFirestore fAddExpense;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense);
-            d = (EditText) findViewById(R.id.e4);
-            d.addTextChangedListener(new TextWatcher() {
-                private String current = "";
-                private String ddmmyyyy = "DDMMYYYY";
-                private Calendar cal = Calendar.getInstance();
 
+        // Select Date
+        purchase_expense_date = findViewById(R.id.expense_purchase_date);
+        purchase_expense_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                datePickerDialog = new DatePickerDialog(activity_expense.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (!s.toString().equals(current)) {
-                        String clean = s.toString().replaceAll("[^\\d.]", "");
-                        String cleanC = current.replaceAll("[^\\d.]", "");
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                purchase_expense_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
-                        int cl = clean.length();
-                        int sel = cl;
-                        for (int i = 2; i <= cl && i < 6; i += 2) {
-                            sel++;
-                        }
-                        //Fix for pressing delete next to a forward slash
-                        if (clean.equals(cleanC)) sel--;
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
 
-                        if (clean.length() < 8){
-                            clean = clean + ddmmyyyy.substring(clean.length());
-                        }else{
-                            //This part makes sure that when we finish entering numbers
-                            //the date is correct, fixing it otherwise
-                            int day  = Integer.parseInt(clean.substring(0,2));
-                            int mon  = Integer.parseInt(clean.substring(2,4));
-                            int year = Integer.parseInt(clean.substring(4,8));
+        purchase_expense_name = findViewById(R.id.expense_purchase_name);
+        purchase_expense_total_price = findViewById(R.id.expense_purchase_total_price);
+        purchase_expense_description = findViewById(R.id.expense_purchase_description);
 
-                            if(mon > 12) mon = 12;
-                            cal.set(Calendar.MONTH, mon-1);
+        purchase_expense_reset = findViewById(R.id.expense_purchase_reset_button);
+        purchase_expense_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                purchase_expense_name.setText(null);
+                purchase_expense_total_price.setText(null);
+                purchase_expense_description.setText(null);
+            }
+        });
 
-                            year = (year<1900)?1900:(year>2100)?2100:year;
-                            cal.set(Calendar.YEAR, year);
-                            // ^ first set year for the line below to work correctly
-                            //with leap years - otherwise, date e.g. 29/02/2012
-                            //would be automatically corrected to 28/02/2012
+        purchase_expense_submit = findViewById(R.id.expense_purchase_add_button);
+        purchase_expense_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String expense_name = purchase_expense_name.getText().toString().trim();
+                String expense_date = purchase_expense_date.getText().toString().trim();
+                String expense_total_price = purchase_expense_total_price.getText().toString().trim();
 
-                            day = (day > cal.getActualMaximum(Calendar.DATE))? cal.getActualMaximum(Calendar.DATE):day;
-                            clean = String.format("%02d%02d%02d",day, mon, year);
-                        }
-
-                        clean = String.format("%s/%s/%s", clean.substring(0, 2),
-                                clean.substring(2, 4),
-                                clean.substring(4, 8));
-
-                        sel = sel < 0 ? 0 : sel;
-                        current = clean;
-                        d.setText(current);
-                        d.setSelection(sel < current.length() ? sel : current.length());
-
-
-
-                    }
+                if (expense_name.isEmpty()) {
+                    purchase_expense_name.setError("Enter Name of Expense");
+                    purchase_expense_name.requestFocus();
+                    return;
+                }
+                if (expense_date.isEmpty()) {
+                    purchase_expense_date.setError("Enter Date");
+                    purchase_expense_date.requestFocus();
+                    return;
+                }
+                if (expense_total_price.isEmpty()) {
+                    purchase_expense_total_price.setError("Enter Total Amount");
+                    purchase_expense_total_price.requestFocus();
                 }
 
+                fAddExpense = FirebaseFirestore.getInstance();
 
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                Query query = fAddExpense.collection("purchaseExpenses").whereEqualTo("purchase_expense_date", expense_date).whereEqualTo("purchase_expense_name",expense_name);
+                query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            purchase_expense_name.setError("Enter Another Name");
+                            purchase_expense_name.requestFocus();
+                        } else {
+                            AddExpenseData(expense_name);
+                        }
+                    }
+                });
+            }
+        });
+    }
+    public void AddExpenseData(String expense_name){
+        model_class_purchase_expense add_data = new model_class_purchase_expense();
+        expense_name = purchase_expense_name.getText().toString().trim();
+        String expense_date = purchase_expense_date.getText().toString().trim();
+        String expense_description = purchase_expense_description.getText().toString().trim();
+        int expense_total_price = Integer.parseInt(purchase_expense_total_price.getText().toString().trim());
 
-                @Override
-                public void afterTextChanged(Editable s) {}
-            });
-        }
+        add_data.setPurchase_expense_name(expense_name);
+        add_data.setPurchase_expense_date(expense_date);
+        add_data.setPurchase_expense_total_price(expense_total_price);
+        add_data.setPurchase_expense_description(expense_description);
 
+
+        fAddExpense.collection("purchaseExpenses").document().set(add_data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                Toast.makeText(activity_expense.this, "Data added successfully", Toast.LENGTH_LONG).show();
+                purchase_expense_name.setText(null);
+                purchase_expense_date.setText(null);
+                purchase_expense_total_price.setText(null);
+                purchase_expense_description.setText(null);
+                purchase_expense_name.requestFocus();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG,"onFailure: "+e.getMessage());
+                Toast.makeText(activity_expense.this, "Failed : Error is "+e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

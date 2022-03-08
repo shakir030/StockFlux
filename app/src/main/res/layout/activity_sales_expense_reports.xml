@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".sales_expense_reports">
+
+    <TextView
+        android:id="@+id/sales_expense_reports_date_text"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="15dp"
+        android:text="Enter Date :- "
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sales_expense_reports_select_date"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/sales_expense_reports_date_text"
+        android:background="@drawable/text_border"
+        android:hint="Select date."
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColorHint="#9A8484"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/sales_expense_reports_select_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sales_expense_reports_select_date"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:drawableRight="@drawable/date_icon"
+        android:drawableTint="@color/white"
+        android:text="Select Date" />
+
+    <TextView
+        android:id="@+id/sales_expense_reports_text_select_expense"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/sales_expense_reports_select_date_button"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="15dp"
+        android:text="Select Expense :- "
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinner_add_sales_expense_reports"
+        android:layout_width="170dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/sales_expense_reports_select_date_button"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/sales_expense_reports_text_select_expense"
+        android:contentDescription="Choose Catogry" />
+
+    <Button
+        android:id="@+id/search_button_sales_expense_reports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sales_expense_reports_text_select_expense"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:drawableRight="@drawable/icon_search"
+        android:drawableTint="@color/white"
+        android:text="Search" />
+
+    <TextView
+        android:id="@+id/Details_text_sales_expense_reports"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_button_sales_expense_reports"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="---- Details of Expenses ----"
+        android:textColor="#ff4500"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/Details_text_sales_expense_reports">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_sales_expense_reports"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/teal_200"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:id="@+id/card_sales_expense_reports_relative_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/sales_expense_reports_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Name of Product :- "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/data_sales_expense_reports_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/sales_expense_reports_name"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/sales_expense_reports_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sales_expense_reports_name"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Date :- "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/data_sales_expense_reports_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/data_sales_expense_reports_name"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/sales_expense_reports_date"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/sales_expense_reports_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sales_expense_reports_date"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Total Price:- "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/data_sales_expense_reports_total_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/data_sales_expense_reports_date"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/sales_expense_reports_total_price"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <TextView
+                        android:id="@+id/sales_expense_reports_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sales_expense_reports_total_price"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Description :- "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/data_sales_expense_reports_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/data_sales_expense_reports_total_price"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/sales_expense_reports_description"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:id="@+id/delete_sales_expense_reports_data_button"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/sales_expense_reports_description"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:backgroundTint="#C50404"
+                        android:drawableTop="@drawable/delete_icon"
+                        android:drawableTint="@color/white"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                    <Button
+                        android:id="@+id/update_sales_expense_reports_button"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@id/sales_expense_reports_description"
+                        android:layout_marginStart="252dp"
+                        android:layout_marginLeft="200dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/delete_sales_expense_reports_data_button"
+                        android:backgroundTint="#04A21E"
+                        android:drawableTop="@drawable/edit_icon"
+                        android:drawableTint="@color/white"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

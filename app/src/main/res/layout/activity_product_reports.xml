@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".product_reports"
+    android:stretchColumns="1,2"
+    android:layout_margin="20dp">
+    <Button
+        android:id="@+id/crate_pdf"
+        android:text="Create PDF"/>
+    <TableRow android:background="@color/teal_200">
+        <TextView android:text="Name of Product"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_column="1"/>
+
+        <TextView android:text="Quantity"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_column="2"/>
+    </TableRow>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view_reports"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</TableLayout>
