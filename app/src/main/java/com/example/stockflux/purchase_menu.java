@@ -2,12 +2,17 @@ package com.example.stockflux;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class purchase_menu extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class purchase_menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,14 @@ public class purchase_menu extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.nav_purchase){
+            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 }
 

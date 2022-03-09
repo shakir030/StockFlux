@@ -89,16 +89,13 @@
                 android:layout_gravity="center"
                 android:id="@+id/logout_button"
                 android:text="Log out"
-                android:layout_margin="20dp"
-                android:layout_width="100dp"
+                android:backgroundTint="@color/black"
+                android:drawableLeft="@drawable/logout_logo"
+                android:drawableTint="@color/white"
+                android:layout_marginTop="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp" />
         </LinearLayout>
     </ScrollView>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/navigation_header"
-        app:menu="@menu/navigation_menu" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

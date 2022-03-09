@@ -78,6 +78,7 @@
         android:layout_marginTop="10dp"
         android:drawableRight="@drawable/icon_search"
         android:drawableTint="@color/white"
+        android:visibility="gone"
         android:text="Search" />
 
     <TextView

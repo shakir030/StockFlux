@@ -2,7 +2,6 @@ package com.example.stockflux;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,11 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     public DrawerLayout drawerLayout;
-    private Button logout_button,Reports_Button,purchase_button,sales_button;
+    private Button logout_button, Reports_Button, purchase_button, sales_button;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -41,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         purchase_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent purchase = new Intent(MainActivity.this,purchase_menu.class);
+                Intent purchase = new Intent(MainActivity.this, purchase_menu.class);
                 startActivity(purchase);
             }
         });
@@ -50,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
         sales_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,activity_sales_home.class));
+                startActivity(new Intent(MainActivity.this, activity_sales_home.class));
             }
         });
 
 
         Reports_Button = findViewById(R.id.Reports_button);
         Reports_Button.setOnClickListener(new View.OnClickListener() {
-                @Override
+            @Override
             public void onClick(View view) {
-                Intent report = new Intent(MainActivity.this,reports.class);
+                Intent report = new Intent(MainActivity.this, reports.class);
                 startActivity(report);
             }
         });
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this,Login.class));
+                startActivity(new Intent(MainActivity.this, Login.class));
             }
         });
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -81,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 user user_profile = snapshot.getValue(user.class);
-                if(user_profile != null){
+                if (user_profile != null) {
                     String user_profile_name = user_profile.fullname;
                     String user_profile_business_name = user_profile.busssinessname;
                     user_name.setText(user_profile_name);
                     business_name.setText(user_profile_business_name);
-                    
+
                 }
             }
 
@@ -97,11 +94,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         // drawer layout instance to toggle the menu icon to open
         // drawer and back button to close drawer
-        drawerLayout = findViewById(R.id.my_drawer_layout);
+        /*drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
         // pass the Open and Close toggle for the drawer layout listener
@@ -126,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }*/
     }
 }

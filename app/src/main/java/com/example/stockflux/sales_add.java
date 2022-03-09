@@ -55,6 +55,7 @@ public class sales_add extends AppCompatActivity {
         search_button_sales = findViewById(R.id.search_button_sales);
         total_qty = findViewById(R.id.total_qty);
         add_name_button = findViewById(R.id.search_name_product);
+        sales_add_submit_button = findViewById(R.id.sales_add_add_button);
 
         add_name_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,7 @@ public class sales_add extends AppCompatActivity {
         search_button_sales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sales_add_submit_button.setVisibility(View.VISIBLE);
                 querydata();
                 fStoreSalesData.collection("addProducts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -123,22 +125,23 @@ public class sales_add extends AppCompatActivity {
             }
         });
 
-        sales_add_submit_button = findViewById(R.id.sales_add_add_button);
+
         sales_add_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //validating no empty textfield
 
-
+                String sales_add_name = product_add_name.getText().toString().trim();
                 String sales_add_id = product_add_id.getText().toString().trim();
                 String sales_add_qty = product_add_qty.getText().toString().trim();
+                String per_price_string = product_add_per_price.getText().toString().trim();
+                String sales_add_date = product_add_date.getText().toString().trim();
                 int sales_qty_int = Integer.parseInt(product_add_qty.getText().toString());
                 int total_qty_string = Integer.parseInt(total_qty.getText().toString());
                 remaining_qty = total_qty_string - sales_qty_int;
                 int sales_add_per_price = Integer.parseInt(product_add_per_price.getText().toString());
                 total_price = sales_qty_int * sales_add_per_price;
-                String per_price_string = product_add_per_price.getText().toString().trim();
-                String sales_add_date = product_add_date.getText().toString().trim();
+
 
                 if (sales_add_id.isEmpty()) {
                     product_add_id.setError("Enter ID !!");
@@ -166,30 +169,15 @@ public class sales_add extends AppCompatActivity {
                     return;
                 }
 
-
                 Query check_id = fStoreSalesData.collection("AddSalesData").whereEqualTo("id",sales_add_id);
                 check_id.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if(!queryDocumentSnapshots.isEmpty()){
+                        if (!queryDocumentSnapshots.isEmpty()) {
                             product_add_id.setError("Enter Another ID");
                             product_add_id.requestFocus();
-                        }
-                        else {
-                            String purchase_add_name = product_add_name.getText().toString().trim();
-                            String date_pick = product_add_date.getText().toString().trim();
-                            Query nquery = fStoreSalesData.collection("AddSalesData").whereEqualTo("date", date_pick).whereEqualTo("name", purchase_add_name);
-                            nquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    if (!queryDocumentSnapshots.isEmpty()) {
-                                        product_add_name.setError("Entry of this product is already done");
-                                        product_add_name.requestFocus();
-                                    } else {
-                                        AddData(sales_document_id); //adds data to firestore databasee
-                                    }
-                                }
-                            });
+                        } else {
+                            AddData(sales_document_id); //adds data to firestore databasee
                         }
                     }
                 });

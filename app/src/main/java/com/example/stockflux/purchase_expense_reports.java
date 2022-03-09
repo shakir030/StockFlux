@@ -94,9 +94,11 @@ public class purchase_expense_reports extends AppCompatActivity {
                                 values_PExpenses.add(expense_name_purchase);
                                 ArrayAdapter<String> SpinnerAdapter = new ArrayAdapter<String>(purchase_expense_reports.this, android.R.layout.simple_spinner_dropdown_item, values_PExpenses);
                                 spinner_list_name_purchase_expense_reports.setAdapter(SpinnerAdapter);
+                                search_button_purchase_expense_reports.setVisibility(View.VISIBLE);
                             }
                         } else {
                             card_view_purchase_expense_reports.setVisibility(View.GONE);
+                            search_button_purchase_expense_reports.setVisibility(View.GONE);
                             spinner_list_name_purchase_expense_reports.setAdapter(null);
                             Toast.makeText(purchase_expense_reports.this, "No Data Found", Toast.LENGTH_SHORT).show();
                         }
@@ -123,6 +125,7 @@ public class purchase_expense_reports extends AppCompatActivity {
                                 values_PExpenses.remove(purchase_expense_name);
                                 ArrayAdapter<String> SpinnerAdapter = new ArrayAdapter<String>(purchase_expense_reports.this, android.R.layout.simple_spinner_dropdown_item, values_PExpenses);
                                 spinner_list_name_purchase_expense_reports.setAdapter(SpinnerAdapter);
+                                search_button_purchase_expense_reports.setVisibility(View.GONE);
                             }
                         } else {
                             Toast.makeText(purchase_expense_reports.this, "No Data Found Button", Toast.LENGTH_SHORT).show();

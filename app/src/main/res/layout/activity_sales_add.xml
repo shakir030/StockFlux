@@ -77,7 +77,6 @@
                 android:layout_marginTop="30dp"
                 android:layout_below="@id/search_button_sales"
                 android:hint="Product name"
-                app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/ic_icons8_product_50"
                 app:startIconTint="#ff8300">
 
@@ -85,8 +84,7 @@
                     android:id="@+id/sales_add_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    app:endIconMode="clear_text" />
+                    android:textSize="20sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -239,6 +237,7 @@
                 android:layout_toEndOf="@id/sales_add_reset_button"
                 android:backgroundTint="#ff4500"
                 android:text="add"
+                android:visibility="gone"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 app:cornerRadius="12sp" />

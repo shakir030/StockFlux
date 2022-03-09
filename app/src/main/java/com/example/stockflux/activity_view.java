@@ -73,15 +73,15 @@ public class activity_view extends AppCompatActivity {
                                 values.add(product_name);
                                 ArrayAdapter<String> SpinnerAdapter = new ArrayAdapter<String>(activity_view.this, android.R.layout.simple_spinner_dropdown_item, values);
                                 spinner_list_name_product.setAdapter(SpinnerAdapter);
-                                search_button.setClickable(true);
+                                search_button.setVisibility(View.VISIBLE);
                             }
                         }
                         else
                         {
                             card_view.setVisibility(View.GONE);
+                            search_button.setVisibility(View.GONE);
                             spinner_list_name_product.setAdapter(null);
                             Toast.makeText(activity_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
-                            search_button.setClickable(false);
                         }
                     }
                 });
@@ -110,7 +110,7 @@ public class activity_view extends AppCompatActivity {
                                 values.remove(product_name);
                                 ArrayAdapter<String> SpinnerAdapter = new ArrayAdapter<String>(activity_view.this, android.R.layout.simple_spinner_dropdown_item, values);
                                 spinner_list_name_product.setAdapter(SpinnerAdapter);
-                                search_button.setClickable(false);
+                                search_button.setVisibility(View.GONE);
                             }
                         }
                         else
