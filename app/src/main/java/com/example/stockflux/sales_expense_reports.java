@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -33,6 +34,8 @@ public class sales_expense_reports extends AppCompatActivity {
     MaterialCardView card_view_sales_expense_reports;
     DatePickerDialog datePickerDialog;
     FirebaseFirestore fS_Expense;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     String document_id;
     ArrayList<String> values_PExpenses = new ArrayList<String>();
 
@@ -83,7 +86,7 @@ public class sales_expense_reports extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String date_pick = select_sales_expense_reports_date.getText().toString().trim();
-                Query query = fS_Expense.collection("salesExpenses").whereEqualTo("date", date_pick);
+                Query query = fS_Expense.collection("Users").document(user_id).collection("salesExpenses").whereEqualTo("date", date_pick);
                 query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -115,7 +118,7 @@ public class sales_expense_reports extends AppCompatActivity {
 
                 String date_pick = select_sales_expense_reports_date.getText().toString().trim();
 
-                Query rquery = fS_Expense.collection("salesExpenses").whereEqualTo("date", date_pick);
+                Query rquery = fS_Expense.collection("Users").document(user_id).collection("salesExpenses").whereEqualTo("date", date_pick);
                 rquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -155,7 +158,7 @@ public class sales_expense_reports extends AppCompatActivity {
         String date_pick = select_sales_expense_reports_date.getText().toString().trim();
         String text = spinner_list_name_sales_expense_reports.getSelectedItem().toString();
 
-        Query query = fS_Expense.collection("salesExpenses").whereEqualTo("date", date_pick).whereEqualTo("name", text);
+        Query query = fS_Expense.collection("Users").document(user_id).collection("salesExpenses").whereEqualTo("date", date_pick).whereEqualTo("name", text);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -195,7 +198,7 @@ public class sales_expense_reports extends AppCompatActivity {
 
     public void delete_data (String id)
     {
-        fS_Expense.collection("salesExpenses").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        fS_Expense.collection("Users").document(user_id).collection("salesExpenses").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(sales_expense_reports.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
@@ -204,7 +207,7 @@ public class sales_expense_reports extends AppCompatActivity {
         });
     }
     public void update_data(String id) {
-        fS_Expense.collection("salesExpenses").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        fS_Expense.collection("Users").document(user_id).collection("salesExpenses").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Intent update = new Intent(sales_expense_reports.this, update_sales_expense.class);

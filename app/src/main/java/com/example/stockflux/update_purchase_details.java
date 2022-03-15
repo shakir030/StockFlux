@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class update_purchase_details extends AppCompatActivity {
@@ -19,6 +20,8 @@ public class update_purchase_details extends AppCompatActivity {
    public FirebaseFirestore firestore_database;
     String document_id,product_name,product_id,product_date,product_description;
     int product_qty,product_per_price,product_total_price;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +108,7 @@ public class update_purchase_details extends AppCompatActivity {
 
 
 
-        firestore_database.collection("addProducts").document(id).update("product_qty",qty,"product_per_price",per_price,"product_description",description,"product_total_price",total_price)
+        firestore_database.collection("Users").document(user_id).collection("addProducts").document(id).update("product_qty",qty,"product_per_price",per_price,"product_description",description,"product_total_price",total_price)
 
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

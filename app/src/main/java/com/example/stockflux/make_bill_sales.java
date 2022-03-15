@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,9 +22,10 @@ import java.util.Locale;
 public class make_bill_sales extends AppCompatActivity {
     TextView mobile_text,organisation_text,costumer_text,date_text,product_name_text,product_qty_text,product_per_price_text,product_total_price_text,product_total_bill_amount;
     FirebaseFirestore fMakeBill;
-    private FirebaseUser user;
     private DatabaseReference reference;
-    String user_id,product_name,costumer_name;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
+    String product_name,costumer_name;
     int product_qty,product_total_price,product_per_price;
 
     @Override
@@ -56,10 +56,8 @@ public class make_bill_sales extends AppCompatActivity {
         date_text.setText("Date :- "+date);
         costumer_text.setText("Costumer Name :- "+costumer_name);
 
-        //get number and organisation name from realtimedatabase
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        //get number and organisation name from realtime database
         reference = FirebaseDatabase.getInstance().getReference("user");
-        user_id = user.getUid();
         reference.child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,6 +29,8 @@ public class activity_add extends AppCompatActivity {
     private Button add_purchase_submit_button,add_purchase_reset_button;
     private DatePickerDialog datePickerDialog;
     private FirebaseFirestore db;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();;
+    String user_id = fAuth.getCurrentUser().getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +99,7 @@ public class activity_add extends AppCompatActivity {
 
                 //checking name is already presented in same date ..
 
-                Query idquery = db.collection("addProducts").whereEqualTo("product_id",purchase_add_id);
+                Query idquery = db.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_id",purchase_add_id);
                 idquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -106,7 +109,7 @@ public class activity_add extends AppCompatActivity {
                         }
                         else {
                             String date_pick = product_add_date.getText().toString().trim();
-                            Query nquery = db.collection("addProducts").whereEqualTo("product_date", date_pick).whereEqualTo("product_name", purchase_add_name);
+                            Query nquery = db.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_date", date_pick).whereEqualTo("product_name", purchase_add_name);
                             nquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -166,7 +169,8 @@ public class activity_add extends AppCompatActivity {
         add_data.setProduct_total_price(purchase_add_total_price);
         add_data.setProduct_description(purchase_add_description);
 
-        db.collection("addProducts").document().set(add_data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        String user_id = fAuth.getCurrentUser().getUid();
+        db.collection("Users").document(user_id).collection("addProducts").document().set(add_data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(activity_add.this, "Data added successfully", Toast.LENGTH_LONG).show();

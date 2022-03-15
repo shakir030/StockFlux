@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,6 +34,8 @@ public class sales_add extends AppCompatActivity {
     Button sales_add_submit_button, sales_add_reset_button, search_button_sales,add_name_button;
     DatePickerDialog datePickerDialog;
     FirebaseFirestore fStoreSalesData;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     String sales_document_id,product_id;
     int remaining_qty,total_price;
     ArrayList<String> sales_values = new ArrayList<String>();
@@ -63,7 +66,7 @@ public class sales_add extends AppCompatActivity {
                 /*SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
                 String currentDateandTime = sdf.format(new Date());*/
 
-                fStoreSalesData.collection("addProducts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                fStoreSalesData.collection("Users").document(user_id).collection("addProducts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
@@ -88,7 +91,7 @@ public class sales_add extends AppCompatActivity {
             public void onClick(View view) {
                 sales_add_submit_button.setVisibility(View.VISIBLE);
                 querydata();
-                fStoreSalesData.collection("addProducts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                fStoreSalesData.collection("Users").document(user_id).collection("addProducts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
@@ -133,12 +136,12 @@ public class sales_add extends AppCompatActivity {
 
                 String sales_add_name = product_add_name.getText().toString().trim();
                 String sales_add_id = product_add_id.getText().toString().trim();
-                String sales_add_qty = product_add_qty.getText().toString().trim();
-                String per_price_string = product_add_per_price.getText().toString().trim();
+                String sales_add_qty = product_add_qty.getText().toString();
+                String per_price_string = product_add_per_price.getText().toString();
                 String sales_add_date = product_add_date.getText().toString().trim();
                 int sales_qty_int = Integer.parseInt(product_add_qty.getText().toString());
-                int total_qty_string = Integer.parseInt(total_qty.getText().toString());
-                remaining_qty = total_qty_string - sales_qty_int;
+                int total_qty_int = Integer.parseInt(total_qty.getText().toString());
+                remaining_qty = total_qty_int - sales_qty_int;
                 int sales_add_per_price = Integer.parseInt(product_add_per_price.getText().toString());
                 total_price = sales_qty_int * sales_add_per_price;
 
@@ -163,13 +166,13 @@ public class sales_add extends AppCompatActivity {
                     product_add_date.requestFocus();
                     return;
                 }
-                if(sales_qty_int > total_qty_string ){
+                if(sales_qty_int > total_qty_int ){
                     product_add_qty.setError("Not Enough Quanity");
                     product_add_qty.requestFocus();
                     return;
                 }
 
-                Query check_id = fStoreSalesData.collection("AddSalesData").whereEqualTo("id",sales_add_id);
+                Query check_id = fStoreSalesData.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("id",sales_add_id);
                 check_id.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -210,7 +213,7 @@ public class sales_add extends AppCompatActivity {
 
         String text = spinner_list_name.getSelectedItem().toString();
 
-        Query query = fStoreSalesData.collection("addProducts").whereEqualTo("product_name", text);
+        Query query = fStoreSalesData.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_name", text);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -258,7 +261,7 @@ public class sales_add extends AppCompatActivity {
         add_data.setDate(sales_add_date);
         add_data.setDescription(sales_add_description);
 
-        fStoreSalesData.collection("AddSalesData").document().set(add_data).addOnSuccessListener(new OnSuccessListener<Void>() {
+        fStoreSalesData.collection("Users").document(user_id).collection("AddSalesData").document().set(add_data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(sales_add.this, "Data added successfully", Toast.LENGTH_LONG).show();
@@ -267,10 +270,12 @@ public class sales_add extends AppCompatActivity {
                 product_add_qty.setText(null);
                 total_qty.setText(null);
                 product_add_date.setText(null);
+                product_add_per_price.setText(null);
                 product_add_total_price.setText(null);
                 product_add_description.setText(null);
+                sales_add_submit_button.setEnabled(false);
 
-                fStoreSalesData.collection("addProducts").document(id).update("product_qty", remaining_qty).addOnSuccessListener(new OnSuccessListener<Void>() {
+                fStoreSalesData.collection("Users").document(user_id).collection("addProducts").document(id).update("product_qty", remaining_qty).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(sales_add.this, "qty updated", Toast.LENGTH_SHORT).show();
@@ -280,7 +285,7 @@ public class sales_add extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Log.e(TAG,"onFailure: "+e.getMessage());
                         Toast.makeText(sales_add.this, "Error is "+e.getMessage(), Toast.LENGTH_LONG).show();
-                        sales_add_submit_button.setEnabled(false);
+
                     }
                 });
 

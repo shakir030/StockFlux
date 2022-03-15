@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -35,6 +36,8 @@ public class activity_view extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private FirebaseFirestore db;
     private String document_id;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     ArrayList<String> values = new ArrayList<String>();
 
     @Override
@@ -56,13 +59,14 @@ public class activity_view extends AppCompatActivity {
         card_view = findViewById(R.id.card);
 
         db = FirebaseFirestore.getInstance(); // get firestore data instance
+        fAuth = FirebaseAuth.getInstance();
 
         // select date and values to spinner data view
         select_date_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String date_pick = select_date.getText().toString().trim();
-                Query query = db.collection("addProducts").whereEqualTo("product_date", date_pick);
+                Query query = db.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_date", date_pick);
                 query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -98,7 +102,7 @@ public class activity_view extends AppCompatActivity {
 
                 String date_pick = select_date.getText().toString().trim();
 
-                Query rquery = db.collection("addProducts").whereEqualTo("product_date",date_pick);
+                Query rquery = db.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_date",date_pick);
                 rquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -163,8 +167,9 @@ public class activity_view extends AppCompatActivity {
     private void querydata() {
         String date_pick = select_date.getText().toString().trim();
         String text = spinner_list_name_product.getSelectedItem().toString();
+        String user_id = fAuth.getCurrentUser().getUid();
 
-        Query query = db.collection("addProducts").whereEqualTo("product_date", date_pick).whereEqualTo("product_name", text);
+        Query query = db.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_date", date_pick).whereEqualTo("product_name", text);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -211,7 +216,7 @@ public class activity_view extends AppCompatActivity {
 
     public void delete_data(String id)
     {
-        db.collection("addProducts").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.collection("Users").document(user_id).collection("addProducts").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(activity_view.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
@@ -221,7 +226,7 @@ public class activity_view extends AppCompatActivity {
     }
     public void update_data(String id)
     {
-        db.collection("addProducts").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        db.collection("Users").document(user_id).collection("addProducts").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Intent update = new Intent(activity_view.this,update_purchase_details.class);
@@ -247,7 +252,7 @@ public class activity_view extends AppCompatActivity {
     }
 
     /*private void getdata() {
-        db.collection("addProducts").document("n9CjsQl75Uc5JyRVmgKL").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        db.collection("Users").documet(user_id).collection("addProducts").document("n9CjsQl75Uc5JyRVmgKL").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 model_class_purchase_add_data data_view = documentSnapshot.toObject(model_class_purchase_add_data.class);

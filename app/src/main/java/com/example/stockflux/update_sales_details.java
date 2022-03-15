@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class update_sales_details extends AppCompatActivity {
@@ -17,6 +18,8 @@ public class update_sales_details extends AppCompatActivity {
     private TextInputEditText sales_update_name,sales_update_id,sales_update_qty,sales_update_per_price,sales_update_discription;
     private Button sales_update_button,sales_reset_button;
     public FirebaseFirestore fStoreUpdate;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     String document_id,sales_name,sales_id,sales_date,sales_description;
     int sales_qty,sales_per_price;
 
@@ -99,7 +102,7 @@ public class update_sales_details extends AppCompatActivity {
 
 
 
-        fStoreUpdate.collection("AddSalesData").document(id).update("quantity",qty,"per_price",per_price,"description",description)
+        fStoreUpdate.collection("Users").document(user_id).collection("AddSalesData").document(id).update("quantity",qty,"per_price",per_price,"description",description)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

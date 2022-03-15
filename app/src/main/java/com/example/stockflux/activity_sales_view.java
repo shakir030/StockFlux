@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -35,6 +36,8 @@ public class activity_sales_view extends AppCompatActivity {
     MaterialCardView card_view_sales;
     DatePickerDialog datePickerDialog;
     FirebaseFirestore fSalesView;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     String document_id;
     ArrayList<String> values_store_sales = new ArrayList<String>();
 
@@ -67,7 +70,7 @@ public class activity_sales_view extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String date_pick = select_sales_date.getText().toString().trim();
-                Query query = fSalesView.collection("AddSalesData").whereEqualTo("date", date_pick);
+                Query query = fSalesView.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date", date_pick);
                 query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -101,7 +104,7 @@ public class activity_sales_view extends AppCompatActivity {
 
                 String date_pick = select_sales_date.getText().toString().trim();
 
-                Query rquery = fSalesView.collection("AddSalesData").whereEqualTo("date", date_pick);
+                Query rquery = fSalesView.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date", date_pick);
                 rquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -204,7 +207,7 @@ public class activity_sales_view extends AppCompatActivity {
         costumer_name.setVisibility(View.GONE);
         continue_button.setVisibility(View.GONE);
 
-        Query query = fSalesView.collection("AddSalesData").whereEqualTo("date", date_pick).whereEqualTo("name", text);
+        Query query = fSalesView.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date", date_pick).whereEqualTo("name", text);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -252,7 +255,7 @@ public class activity_sales_view extends AppCompatActivity {
     }
 
     public void delete_data(String id) {
-        fSalesView.collection("AddSalesData").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        fSalesView.collection("Users").document(user_id).collection("AddSalesData").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(activity_sales_view.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
@@ -262,7 +265,7 @@ public class activity_sales_view extends AppCompatActivity {
     }
 
     public void update_data(String id) {
-        fSalesView.collection("AddSalesData").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        fSalesView.collection("Users").document(user_id).collection("AddSalesData").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Intent update = new Intent(activity_sales_view.this, update_sales_details.class);

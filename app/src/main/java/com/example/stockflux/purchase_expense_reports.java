@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -33,6 +34,8 @@ public class purchase_expense_reports extends AppCompatActivity {
     MaterialCardView card_view_purchase_expense_reports;
     DatePickerDialog datePickerDialog;
     FirebaseFirestore fPExpense;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     String document_id;
     ArrayList<String> values_PExpenses = new ArrayList<String>();
 
@@ -83,7 +86,7 @@ public class purchase_expense_reports extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String date_pick = select_purchase_expense_reports_date.getText().toString().trim();
-                Query query = fPExpense.collection("purchaseExpenses").whereEqualTo("purchase_expense_date", date_pick);
+                Query query = fPExpense.collection("Users").document(user_id).collection("purchaseExpenses").whereEqualTo("purchase_expense_date", date_pick);
                 query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -114,7 +117,7 @@ public class purchase_expense_reports extends AppCompatActivity {
 
                 String date_pick = select_purchase_expense_reports_date.getText().toString().trim();
 
-                Query rquery = fPExpense.collection("purchaseExpenses").whereEqualTo("purchase_expense_date", date_pick);
+                Query rquery = fPExpense.collection("Users").document(user_id).collection("purchaseExpenses").whereEqualTo("purchase_expense_date", date_pick);
                 rquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -154,7 +157,7 @@ public class purchase_expense_reports extends AppCompatActivity {
         String date_pick = select_purchase_expense_reports_date.getText().toString().trim();
         String text = spinner_list_name_purchase_expense_reports.getSelectedItem().toString();
 
-        Query query = fPExpense.collection("purchaseExpenses").whereEqualTo("purchase_expense_date", date_pick).whereEqualTo("purchase_expense_name", text);
+        Query query = fPExpense.collection("Users").document(user_id).collection("purchaseExpenses").whereEqualTo("purchase_expense_date", date_pick).whereEqualTo("purchase_expense_name", text);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -194,7 +197,7 @@ public class purchase_expense_reports extends AppCompatActivity {
 
     public void delete_data (String id)
     {
-        fPExpense.collection("purchaseExpenses").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        fPExpense.collection("Users").document(user_id).collection("purchaseExpenses").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(purchase_expense_reports.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
@@ -203,7 +206,7 @@ public class purchase_expense_reports extends AppCompatActivity {
         });
     }
     public void update_data(String id) {
-        fPExpense.collection("purchaseExpenses").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        fPExpense.collection("Users").document(user_id).collection("purchaseExpenses").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Intent update = new Intent(purchase_expense_reports.this, update_purchase_expense.class);

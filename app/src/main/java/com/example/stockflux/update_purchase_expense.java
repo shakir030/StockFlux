@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class update_purchase_expense extends AppCompatActivity {
     TextInputEditText purchase_expense_update_name,purchase_expense_update_total_price,purchase_expense_update_description;
     Button purchase_expense_update_reset,purchase_expense_update_submit;
     FirebaseFirestore fPexpense_update;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
     String document_id,update_name,update_description;
     int update_total_price;
     @Override
@@ -76,7 +79,7 @@ public class update_purchase_expense extends AppCompatActivity {
         purchase_expense_update.setPurchase_expense_description(description);
 
 
-        fPexpense_update.collection("purchaseExpenses").document(id).update("purchase_expense_total_price", total_price, "purchase_expense_description", description)
+        fPexpense_update.collection("Users").document(user_id).collection("purchaseExpenses").document(id).update("purchase_expense_total_price", total_price, "purchase_expense_description", description)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

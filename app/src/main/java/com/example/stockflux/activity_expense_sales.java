@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -28,6 +29,8 @@ public class activity_expense_sales extends AppCompatActivity {
     Button sales_expense_submit, sales_expense_reset;
     DatePickerDialog datePickerDialog;
     FirebaseFirestore fSalesExpenses;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +98,7 @@ public class activity_expense_sales extends AppCompatActivity {
                 }
                 fSalesExpenses = FirebaseFirestore.getInstance();
 
-                Query query = fSalesExpenses.collection("salesExpenses").whereEqualTo("date", expense_sales_date).whereEqualTo("name", expense_sales_name);
+                Query query = fSalesExpenses.collection("Users").document(user_id).collection("salesExpenses").whereEqualTo("date", expense_sales_date).whereEqualTo("name", expense_sales_name);
                 query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -125,7 +128,7 @@ public class activity_expense_sales extends AppCompatActivity {
         add_sales_expense.setDescription(expense_description);
 
 
-        fSalesExpenses.collection("salesExpenses").document().set(add_sales_expense).addOnSuccessListener(new OnSuccessListener<Void>() {
+        fSalesExpenses.collection("Users").document(user_id).collection("salesExpenses").document().set(add_sales_expense).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 
