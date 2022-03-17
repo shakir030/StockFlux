@@ -253,6 +253,7 @@ public class sales_add extends AppCompatActivity {
         int sales_per_price_add = Integer.parseInt(product_add_per_price.getText().toString().trim());
         int sales_add_total_price = add_data.getTotal_Price();
 
+
         add_data.setName(sales_add_name);
         add_data.setID(sales_add_id);
         add_data.setQuantity(sales_add_qty);
@@ -260,6 +261,7 @@ public class sales_add extends AppCompatActivity {
         add_data.setTotal_Price(sales_add_total_price);
         add_data.setDate(sales_add_date);
         add_data.setDescription(sales_add_description);
+        add_data.setPurchase_ID(product_id);
 
         fStoreSalesData.collection("Users").document(user_id).collection("AddSalesData").document().set(add_data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class reports extends AppCompatActivity {
-    Button Expense_tracker,product_list;
+    Button Expense_tracker,product_list,profit_loss;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
@@ -31,6 +31,13 @@ public class reports extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(reports.this,product_reports.class));
+            }
+        });
+        profit_loss = findViewById(R.id.Profit_Loss);
+        profit_loss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(reports.this,profit_loss.class));
             }
         });
 

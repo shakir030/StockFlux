@@ -269,7 +269,6 @@
                         android:layout_below="@id/sales_view_total_price"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
                         android:text="Description of Product :- "
                         android:textColor="@color/black"
                         android:textSize="20sp"
@@ -287,11 +286,36 @@
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
+                    <TextView
+                        android:id="@+id/purchase_id_sales_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sales_view_description"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Purchase ID :- "
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <TextView
+                        android:id="@+id/data_purchase_id_sales_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/data_sales_view_description"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toEndOf="@id/purchase_id_sales_view"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
                     <Button
                         android:id="@+id/delete_sales_data_button"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
-                        android:layout_below="@id/sales_view_description"
+                        android:layout_below="@id/purchase_id_sales_view"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
@@ -300,11 +324,12 @@
                         android:drawableTint="@color/white"
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+
                     <Button
                         android:id="@+id/make_bill"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
-                        android:layout_below="@id/sales_view_description"
+                        android:layout_below="@id/purchase_id_sales_view"
                         android:layout_centerInParent="true"
                         android:layout_marginStart="55dp"
                         android:layout_marginTop="10dp"
@@ -316,7 +341,7 @@
                         android:id="@+id/update_sales_add_button"
                         android:layout_width="40dp"
                         android:layout_height="50dp"
-                        android:layout_below="@id/sales_view_description"
+                        android:layout_below="@id/purchase_id_sales_view"
                         android:layout_marginStart="40dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"

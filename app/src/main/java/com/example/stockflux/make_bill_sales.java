@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,23 +56,25 @@ public class make_bill_sales extends AppCompatActivity {
         costumer_text.setText("Costumer Name :- "+costumer_name);
 
         //get number and organisation name from realtime database
-        reference = FirebaseDatabase.getInstance().getReference("user");
-        reference.child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user user_profile = snapshot.getValue(user.class);
-                if(user_profile != null){
-                    String number = user_profile.number;
-                    String organistaion_name = user_profile.busssinessname;
-                    mobile_text.setText("Mobile Number :- "+number);
-                    organisation_text.setText(organistaion_name);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(make_bill_sales.this, "Something wrong happen please try again", Toast.LENGTH_LONG).show();
-            }
-        });
+       Query query = fMakeBill.collection("Users").document(user_id).collection("UsersData");
+       query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+           @Override
+           public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+               if(queryDocumentSnapshots.isEmpty()){
+                   Toast.makeText(make_bill_sales.this, "No Data Found", Toast.LENGTH_SHORT).show();
+               }
+               else {
+                   for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                       user user_profile = documentSnapshot.toObject(user.class);
+                       String number = user_profile.getNumber();
+                       String organistaion_name = user_profile.getBusinessname();
+                       mobile_text.setText("Mobile Number :- " + number);
+                       organisation_text.setText(organistaion_name);
+                   }
+               }
+           }
+       });
+
 
         //get data of products
 

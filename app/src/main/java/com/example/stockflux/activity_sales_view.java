@@ -30,7 +30,7 @@ import java.util.Calendar;
 
 public class activity_sales_view extends AppCompatActivity {
     EditText costumer_name;
-    TextView select_sales_date, data_sales_name, data_sales_id, data_sales_qty, data_sales_per_price, data_sales_date, data_sales_total_price, data_sales_description;
+    TextView select_sales_date, data_sales_name, data_sales_id, data_sales_qty, data_sales_per_price, data_sales_date, data_sales_total_price, data_sales_description,data_purchase_id;
     Button search_button_sales, select_date_button_sales, delete_data_button_sales, update_data_button_sales, bill_generate_button, continue_button;
     Spinner spinner_list_name_product_sales;
     MaterialCardView card_view_sales;
@@ -39,6 +39,7 @@ public class activity_sales_view extends AppCompatActivity {
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     String user_id = fAuth.getCurrentUser().getUid();
     String document_id;
+    int purchase_qty,sales_qty,total_qty_purchase;
     ArrayList<String> values_store_sales = new ArrayList<String>();
 
     @Override
@@ -59,6 +60,7 @@ public class activity_sales_view extends AppCompatActivity {
         spinner_list_name_product_sales = findViewById(R.id.spinner_add_view_sales);
         card_view_sales = findViewById(R.id.card_sales_view);
         bill_generate_button = findViewById(R.id.make_bill);
+        data_purchase_id = findViewById(R.id.data_purchase_id_sales_view);
         costumer_name = findViewById(R.id.costumer_name);
         continue_button = findViewById(R.id.bill_continue);
 
@@ -153,8 +155,35 @@ public class activity_sales_view extends AppCompatActivity {
 
         delete_data_button_sales = findViewById(R.id.delete_sales_data_button);
         delete_data_button_sales.setOnClickListener(new View.OnClickListener() {
+            String purchase_document_id;
             @Override
             public void onClick(View view) {
+                String p_name = data_sales_name.getText().toString().trim();
+                String p_id = data_purchase_id.getText().toString().trim();
+
+                sales_qty = Integer.parseInt(data_sales_qty.getText().toString());
+
+                Query query = fSalesView.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_name",p_name).whereEqualTo("product_id",p_id);
+                query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            purchase_document_id = documentSnapshot.getId();
+                            model_class_purchase_add_data purchase_data = documentSnapshot.toObject(model_class_purchase_add_data.class);
+                            purchase_qty = purchase_data.getProduct_qty();
+                            total_qty_purchase = purchase_qty + sales_qty;
+
+                            fSalesView.collection("Users").document(user_id).collection("addProducts").document(purchase_document_id).update("product_qty",total_qty_purchase).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(activity_sales_view.this, "Updated", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
+
+
                 costumer_name.setVisibility(View.GONE);
                 continue_button.setVisibility(View.GONE);
                 delete_data(document_id);
@@ -243,6 +272,9 @@ public class activity_sales_view extends AppCompatActivity {
                         String product_description = data_sales_view.getDescription();
                         data_sales_description.setText(product_description);
 
+                        String purchase_ID = data_sales_view.getPurchase_ID();
+                        data_purchase_id.setText(purchase_ID);
+
                     }
                 }
             }
@@ -255,6 +287,7 @@ public class activity_sales_view extends AppCompatActivity {
     }
 
     public void delete_data(String id) {
+
         fSalesView.collection("Users").document(user_id).collection("AddSalesData").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -271,7 +304,8 @@ public class activity_sales_view extends AppCompatActivity {
                 Intent update = new Intent(activity_sales_view.this, update_sales_details.class);
                 String document_id = id.toString().trim();
                 String name = data_sales_name.getText().toString().trim();
-                String sales_id = data_sales_id.getText().toString();
+                String sales_id = data_sales_id.getText().toString().trim();
+                String purchase_id = data_purchase_id.getText().toString().trim();
                 int qty = Integer.parseInt(data_sales_qty.getText().toString());
                 int per_price = Integer.parseInt(data_sales_per_price.getText().toString());
                 int total_price = Integer.parseInt(data_sales_total_price.getText().toString().trim());
@@ -280,6 +314,7 @@ public class activity_sales_view extends AppCompatActivity {
                 update.putExtra("doucmentid", document_id);
                 update.putExtra("salesname", name);
                 update.putExtra("salesid", sales_id);
+                update.putExtra("purchaseid",purchase_id);
                 update.putExtra("sales_qty", qty);
                 update.putExtra("sales_per_price", per_price);
                 update.putExtra("sales_total_price", total_price);

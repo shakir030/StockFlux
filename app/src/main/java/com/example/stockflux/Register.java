@@ -13,16 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Register extends AppCompatActivity {
-    FirebaseAuth fAuth;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    //String user_id = fAuth.getCurrentUser().getUid();
     TextInputEditText txt_name, txt_email, txt_number, txt_password, txt_repassword, txt_bussiness_name;
     ProgressBar progress;
+    FirebaseFirestore fRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,9 @@ public class Register extends AppCompatActivity {
         txt_repassword = findViewById(R.id.repassword_register);
         txt_bussiness_name = findViewById(R.id.business_register);
         progress = findViewById(R.id.progress_bar);
-        fAuth = FirebaseAuth.getInstance();
+
+        fRegister = FirebaseFirestore.getInstance();
+
         Button register_button = findViewById(R.id.Register_submit);
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,21 +117,22 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
-                            user user = new user(name,email,number,bussiness_name);
-                            FirebaseDatabase.getInstance().getReference("user").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            String user_id = fAuth.getCurrentUser().getUid();
+                            user user_data = new user();
+                            String name = txt_name.getText().toString().trim();
+                            String email = txt_email.getText().toString().trim();
+                            String number = txt_number.getText().toString().trim();
+                            String bussiness_name = txt_bussiness_name.getText().toString().trim();
+                            user_data.setFullname(name);
+                            user_data.setEmail(email);
+                            user_data.setNumber(number);
+                            user_data.setBusinessname(bussiness_name);
+                            fRegister.collection("Users").document(user_id).collection("UsersData").document().set(user_data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        startActivity(new Intent(Register.this,Login.class));
-                                        Toast.makeText(Register.this, "User has been Registered Successfull", Toast.LENGTH_SHORT).show();
-                                        progress.setVisibility(View.GONE);
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(Register.this, "Failed to Register try again", Toast.LENGTH_SHORT).show();
-                                        progress.setVisibility(View.GONE);
-                                    }
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(Register.this,MainActivity.class));
+                                    progress.setVisibility(View.GONE);
                                 }
                             });
                         }

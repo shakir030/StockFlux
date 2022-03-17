@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.stockflux" >
+    package="com.example.stockflux">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -10,12 +10,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StockFlux" >
+        android:theme="@style/Theme.StockFlux">
+        <activity
+            android:name=".user_account"
+            android:exported="false" />
+        <activity
+            android:name=".profit_loss"
+            android:exported="false" />
         <activity
             android:name=".Register"
             android:exported="false"
-            android:label="Register"
-            android:parentActivityName=".Login" />
+            android:label="Register" />
         <activity
             android:name=".activity_forget_password"
             android:exported="false"
@@ -23,7 +28,7 @@
             android:parentActivityName=".Login" />
         <activity
             android:name=".Login"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

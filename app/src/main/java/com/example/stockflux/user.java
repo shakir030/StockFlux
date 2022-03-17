@@ -1,15 +1,45 @@
 package com.example.stockflux;
 
 public class user {
-    public String fullname,email,busssinessname,number;
-    public user(){
+    public String fullname;
+    public String email;
+
+    public String getBusinessname() {
+        return businessname;
+    }
+
+    public void setBusinessname(String businessname) {
+        this.businessname = businessname;
+    }
+
+    public String businessname;
+    public String number;
+
+    user(){
 
     }
-    public user (String fullname,String email,String number,String busssinessname)
-    {
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
-        this.busssinessname = busssinessname;
+    }
+
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
         this.number = number;
     }
 }

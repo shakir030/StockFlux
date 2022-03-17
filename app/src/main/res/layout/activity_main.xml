@@ -30,11 +30,14 @@
                 android:id="@+id/login_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="right"
+                android:drawableTop="@drawable/user_account_logo"
+                android:drawableTint="@color/black"
                 android:backgroundTint="#E97451"
                 android:text="@string/user_name"
-                android:textColor="#F44336"
-                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_marginRight="10dp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/name_of_organisation"
@@ -44,7 +47,7 @@
                 android:text="Name of Organisation"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:textSize="25sp"
                 android:textStyle="bold" />
             <Button
@@ -57,7 +60,7 @@
                 android:backgroundTint="#DA4010"
                 app:cornerRadius="20dp"
                 app:icon="@drawable/purchase_icon"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="70dp"
                 android:textSize="25sp"/>
 
             <Button

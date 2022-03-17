@@ -7,32 +7,56 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity{
-    public DrawerLayout drawerLayout;
+    //public DrawerLayout drawerLayout;
     private Button logout_button, Reports_Button, purchase_button, sales_button;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
-    private FirebaseUser user;
-    private DatabaseReference reference;
-    private String user_id;
+    //public ActionBarDrawerToggle actionBarDrawerToggle;
+    TextView Business_name,full_name;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
+    String user_id = fAuth.getCurrentUser().getUid();
+    FirebaseFirestore fGetUser = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Business_name = findViewById(R.id.name_of_organisation);
+        full_name = findViewById(R.id.login_user);
+
+        Query qurey = fGetUser.collection("Users").document(user_id).collection("UsersData");
+        qurey.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(queryDocumentSnapshots.isEmpty()){
+                    Toast.makeText(MainActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        user user_data = documentSnapshot.toObject(user.class);
+                        String business_name = user_data.getBusinessname();
+                        String name = user_data.getFullname();
+                        Business_name.setText(business_name);
+                        full_name.setText(name);
+                    }
+                }
+            }
+        });
+        full_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,user_account.class));
+            }
+        });
 
         purchase_button = findViewById(R.id.Purchase_button);
         purchase_button.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +93,10 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(new Intent(MainActivity.this, Login.class));
             }
         });
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+        /*user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("user");
         user_id = user.getUid();
         final TextView user_name = findViewById(R.id.login_user);
@@ -91,7 +118,7 @@ public class MainActivity extends AppCompatActivity{
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(MainActivity.this, "Something wrong happen please try again", Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
 
         // drawer layout instance to toggle the menu icon to open

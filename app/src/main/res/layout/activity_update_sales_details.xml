@@ -80,19 +80,33 @@
                     android:inputType="number"
                     tools:ignore="TextContrastCheck" />
 
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/qty_total_stored"
+                android:layout_width="160dp"
+                android:layout_height="65dp"
+                android:layout_below="@id/sales_update_id_layout"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@id/sales_update_qty_layout"
+                android:background="@drawable/text_border"
+                android:ems="10"
+                android:hint="Total QTY"
+                android:padding="10dp"
+                android:textSize="25sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/sales_update_per_price_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
-                android:layout_toEndOf="@id/sales_update_qty_layout"
                 android:hint="Per/Price "
                 app:startIconTint="#ff8300"
-                android:layout_below="@id/sales_update_id_layout">
+                android:layout_below="@id/sales_update_qty_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sales_update_per_price"
@@ -112,7 +126,7 @@
                 android:layout_marginTop="25dp"
                 android:hint="Description"
                 app:startIconTint="#ff8300"
-                android:layout_below="@id/sales_update_qty_layout">
+                android:layout_below="@id/sales_update_per_price_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sales_update_description"

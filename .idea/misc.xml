@@ -18,6 +18,7 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/table_data_style.xml" value="0.131" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/table_heading_style.xml" value="0.131" />
         <entry key="..\:/Projects/Projects/app/src/main/res/drawable/text_border.xml" value="0.1275" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/drawable/user_account_logo.xml" value="0.162" />
         <entry key="..\:/Projects/Projects/app/src/main/res/font-v26/dancing_script.xml" value="0.2604166666666667" />
         <entry key="..\:/Projects/Projects/app/src/main/res/font/dancing_script.xml" value="0.2604166666666667" />
         <entry key="..\:/Projects/Projects/app/src/main/res/font/font.xml" value="0.2604166666666667" />
@@ -37,6 +38,8 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_navigation_menu2.xml" value="0.1" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_product_reports.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_profit_and_loss.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_profit_loss.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_profit_loss_table.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_expense_reports.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_register.xml" value="0.221875" />
@@ -53,6 +56,7 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_purchase_expense.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_sales_details.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_update_sales_expense.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_user_account.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_view.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/app_bar_try_nav_drawer.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/card_purchase_view_design.xml" value="0.221875" />
@@ -66,6 +70,7 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/navigation_header.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/product_reports_item_layout.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/profit_and_loss_items.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/profit_loss_items_layout.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/activity_main_drawer.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/navigation_menu.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/menu/try_nav_drawer.xml" value="0.221875" />

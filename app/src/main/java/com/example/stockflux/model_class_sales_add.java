@@ -1,8 +1,9 @@
 package com.example.stockflux;
 
 public class model_class_sales_add {
-    String Name,ID,Date,Description;
+    String Name,ID,Date,Description,Purchase_ID;
     int Quantity,Total_Price,per_price;
+
 
     model_class_sales_add(){
 
@@ -65,5 +66,12 @@ public class model_class_sales_add {
 
     public void setPer_price(int per_price) {
         this.per_price = per_price;
+    }
+    public String getPurchase_ID() {
+        return Purchase_ID;
+    }
+
+    public void setPurchase_ID(String purchase_ID) {
+        Purchase_ID = purchase_ID;
     }
 }
