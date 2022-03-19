@@ -41,6 +41,7 @@
         android:layout_below="@id/date_select_sales_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/black"
         android:drawableRight="@drawable/date_icon"
         android:drawableTint="@color/white"
         android:text="Select Date" />
@@ -76,6 +77,7 @@
         android:layout_below="@id/sales_name_select_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:backgroundTint="@color/black"
         android:drawableRight="@drawable/icon_search"
         android:drawableTint="@color/white"
         android:visibility="gone"

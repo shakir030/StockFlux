@@ -200,6 +200,7 @@ public class activity_sales_view extends AppCompatActivity {
 
 
                 String name = data_sales_name.getText().toString().trim();
+                String id = data_sales_id.getText().toString().trim();
                 int qty = Integer.parseInt(data_sales_qty.getText().toString());
                 int per_price = Integer.parseInt(data_sales_per_price.getText().toString());
                 int total_price = Integer.parseInt(data_sales_total_price.getText().toString().trim());
@@ -210,6 +211,7 @@ public class activity_sales_view extends AppCompatActivity {
                         String costumer_name_text = costumer_name.getText().toString().trim();
                         continue_bill.putExtra("costumer_name", costumer_name_text);
                         continue_bill.putExtra("product_name", name);
+                        continue_bill.putExtra("Bill_id",id);
                         continue_bill.putExtra("product_qty", qty);
                         continue_bill.putExtra("product_per_price", per_price);
                         continue_bill.putExtra("product_total_price", total_price);

@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.stockflux">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,14 @@
         android:theme="@style/Theme.StockFlux">
         <activity
             android:name=".user_account"
-            android:exported="false" />
+            android:exported="false"
+            android:label="User Account"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".profit_loss"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Profit / Loss"
+            android:parentActivityName=".reports"/>
         <activity
             android:name=".Register"
             android:exported="false"
