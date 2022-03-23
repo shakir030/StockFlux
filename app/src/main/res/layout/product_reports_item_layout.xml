@@ -2,24 +2,35 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1,2">
+    android:stretchColumns="1,2,3">
 
     <TableRow>
-
-        <TextView android:id="@+id/Product_name"
-            android:textSize="18dp"
-            android:layout_width="160dp"
+        <TextView android:id="@+id/product_date"
+            android:textSize="16sp"
+            android:background="#C3BCBC"
+            android:textColor="@color/black"
+            android:layout_width="60dp"
             android:padding="10dp"
             android:gravity="left"
-            android:background="@drawable/table_data_style"
             android:layout_column="1"/>
 
-        <TextView android:id="@+id/product_qty"
-            android:textSize="18dp"
-            android:gravity="center"
+        <TextView android:id="@+id/Product_name"
+            android:textSize="16sp"
+            android:background="#C3BCBC"
+            android:textColor="@color/black"
+            android:layout_width="80dp"
             android:padding="10dp"
-            android:background="@drawable/table_data_style"
+            android:gravity="left"
             android:layout_column="2"/>
+
+        <TextView android:id="@+id/product_qty"
+            android:textSize="16sp"
+            android:gravity="right"
+            android:padding="10dp"
+            android:layout_width="70dp"
+            android:background="#C3BCBC"
+            android:textColor="@color/black"
+            android:layout_column="3"/>
     </TableRow>
 
 </TableLayout>

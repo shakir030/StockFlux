@@ -2,6 +2,7 @@ package com.example.stockflux;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -13,14 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Register extends AppCompatActivity {
+    public static final String TAG = "REGISTER";
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     //String user_id = fAuth.getCurrentUser().getUid();
     TextInputEditText txt_name, txt_email, txt_number, txt_password, txt_repassword, txt_bussiness_name;
@@ -131,7 +135,21 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(Register.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(Register.this,MainActivity.class));
+                                    FirebaseUser user_verify = fAuth.getCurrentUser();
+                                    user_verify.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(Register.this, "E-Mail Verification has been sent to your E-Mail", Toast.LENGTH_LONG).show();
+                                            Intent register = new Intent(Register.this,Login.class);
+                                            startActivity(register);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d(TAG, "onFailure: Email not sent"+e.getMessage());
+
+                                        }
+                                    });
                                     progress.setVisibility(View.GONE);
                                 }
                             });

@@ -1,16 +1,21 @@
 package com.example.stockflux;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -18,9 +23,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity{
     //public DrawerLayout drawerLayout;
-    private Button logout_button, Reports_Button, purchase_button, sales_button;
+    Button logout_button, Reports_Button, purchase_button, sales_button,verify_button;
     //public ActionBarDrawerToggle actionBarDrawerToggle;
-    TextView Business_name,full_name;
+    TextView Business_name,full_name,warning_verify;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     String user_id = fAuth.getCurrentUser().getUid();
     FirebaseFirestore fGetUser = FirebaseFirestore.getInstance();
@@ -37,10 +42,9 @@ public class MainActivity extends AppCompatActivity{
         qurey.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(queryDocumentSnapshots.isEmpty()){
+                if (queryDocumentSnapshots.isEmpty()) {
                     Toast.makeText(MainActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         user user_data = documentSnapshot.toObject(user.class);
                         String business_name = user_data.getBusinessname();
@@ -51,6 +55,42 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+
+        verify_button = findViewById(R.id.verify_button);
+        warning_verify = findViewById(R.id.warning_verify);
+
+        FirebaseUser user = fAuth.getCurrentUser();
+        if(user.isEmailVerified()) {
+            warning_verify.setVisibility(View.GONE);
+            verify_button.setVisibility(View.GONE);
+        } else{
+            warning_verify.setVisibility(View.VISIBLE);
+            verify_button.setVisibility(View.VISIBLE);
+            warning_verify.setText("Please Verify your Account");
+            warning_verify.setTextColor(Color.RED);
+            verify_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(MainActivity.this, "E-Mail Verification has been sent to your E-Mail", Toast.LENGTH_LONG).show();
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(MainActivity.this, Login.class));
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("TAG", "onFailure: Email not sent"+e.getMessage());
+
+                        }
+                    });
+                }
+            });
+        }
+
+
         full_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

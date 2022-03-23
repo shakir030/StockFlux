@@ -21,16 +21,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/login_user"
+                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:drawableTop="@drawable/user_account_logo"
                 android:drawableTint="@color/black"
                 android:backgroundTint="#E97451"
@@ -42,6 +42,8 @@
             <TextView
                 android:id="@+id/name_of_organisation"
                 android:layout_width="305dp"
+                android:layout_below="@id/login_user"
+                android:layout_centerHorizontal="true"
                 android:layout_height="32dp"
                 android:layout_gravity="center"
                 android:text="Name of Organisation"
@@ -50,24 +52,29 @@
                 android:layout_marginTop="40dp"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
             <Button
                 android:id="@+id/Purchase_button"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
+                android:layout_below="@id/name_of_organisation"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:text="Purchase"
-                android:textStyle="bold"
-                android:backgroundTint="#DA4010"
-                app:cornerRadius="20dp"
-                app:icon="@drawable/purchase_icon"
                 android:layout_marginTop="70dp"
-                android:textSize="25sp"/>
+                android:backgroundTint="#DA4010"
+                android:text="Purchase"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/purchase_icon" />
 
             <Button
                 android:id="@+id/Sales_button"
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
+                android:layout_below="@id/Purchase_button"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:backgroundTint="#DA4010"
                 android:text="Sales"
@@ -81,6 +88,8 @@
                 android:layout_width="300dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
+                android:layout_below="@id/Sales_button"
+                android:layout_centerHorizontal="true"
                 android:text="Reports"
                 app:cornerRadius="20dp"
                 app:icon="@drawable/reports_icon"
@@ -92,13 +101,40 @@
                 android:layout_gravity="center"
                 android:id="@+id/logout_button"
                 android:text="Log out"
+                android:layout_below="@id/Reports_button"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/black"
                 android:drawableLeft="@drawable/logout_logo"
                 android:drawableTint="@color/white"
                 android:layout_marginTop="80dp"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/warning_verify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Hello"
+                android:textSize="22sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/verify_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/warning_verify"
+                android:backgroundTint="@color/black"
+                android:drawableLeft="@drawable/verify"
+                android:drawableTint="@color/white"
+                android:text="Verify"
+                android:visibility="gone" />
+        </RelativeLayout>
     </ScrollView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

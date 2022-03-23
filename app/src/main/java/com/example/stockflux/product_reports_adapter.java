@@ -34,6 +34,7 @@ public class product_reports_adapter extends RecyclerView.Adapter<product_report
 
             model_products_reports model = products_list.get(position);
             holder.product_name.setText(model.product_name);
+            holder.product_date.setText(model.product_date);
             holder.product_qty.setText(String.valueOf(model.product_qty));
 
     }
@@ -44,12 +45,14 @@ public class product_reports_adapter extends RecyclerView.Adapter<product_report
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView product_name,product_qty;
+        TextView product_name,product_qty,product_date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             product_name = itemView.findViewById(R.id.Product_name);
+            product_date = itemView.findViewById(R.id.product_date);
             product_qty = itemView.findViewById(R.id.product_qty);
+
         }
     }
 }

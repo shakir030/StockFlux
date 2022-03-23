@@ -20,12 +20,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
-    private TextView register_text,forget_password;
-    private Button guest_button,sign_in_button;
-    private TextInputEditText email_login,password_login;
-    private FirebaseAuth fAuth;
-    private FirebaseUser user;
-    private ProgressBar progress_login;
+    public static final String TAG = "LOGIN";
+    TextView register_text,forget_password;
+    Button sign_in_button;
+    TextInputEditText email_login,password_login;
+    FirebaseAuth fAuth;
+    FirebaseUser user;
+    ProgressBar progress_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,40 +65,34 @@ public class Login extends AppCompatActivity {
                 String email_string = email_login.getText().toString().trim();
                 String password_string = password_login.getText().toString().trim();
 
-                if(email_string.isEmpty())
-                {
+                if (email_string.isEmpty()) {
                     email_login.setError("Email is Required !!");
                     email_login.requestFocus();
                     return;
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(email_string).matches())
-                {
+                if (!Patterns.EMAIL_ADDRESS.matcher(email_string).matches()) {
                     email_login.setError("Email is not Valid.");
                     email_login.requestFocus();
                     return;
                 }
-                if(password_string.isEmpty())
-                {
+                if (password_string.isEmpty()) {
                     password_login.setError("Password is Required !!.");
                     password_login.requestFocus();
                     return;
                 }
-                if(password_string.length()<6)
-                {
+                if (password_string.length() < 6) {
                     password_login.setError("Password should be more than 6 characters ");
                     password_login.requestFocus();
                     return;
                 }
                 progress_login.setVisibility(View.VISIBLE);
-                fAuth.signInWithEmailAndPassword(email_string,password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.signInWithEmailAndPassword(email_string, password_string).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             progress_login.setVisibility(View.GONE);
-                           startActivity(new Intent(Login.this,MainActivity.class));
-                        }
-                        else
-                        {
+                            startActivity(new Intent(Login.this, MainActivity.class));
+                        } else {
                             Toast.makeText(Login.this, "Failed to Login", Toast.LENGTH_LONG).show();
                             progress_login.setVisibility(View.GONE);
                         }

@@ -3,15 +3,6 @@ package com.example.stockflux;
 public class user {
     public String fullname;
     public String email;
-
-    public String getBusinessname() {
-        return businessname;
-    }
-
-    public void setBusinessname(String businessname) {
-        this.businessname = businessname;
-    }
-
     public String businessname;
     public String number;
 
@@ -41,5 +32,12 @@ public class user {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+    public String getBusinessname() {
+        return businessname;
+    }
+
+    public void setBusinessname(String businessname) {
+        this.businessname = businessname;
     }
 }

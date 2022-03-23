@@ -21,21 +21,24 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/logo_login"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/logo"
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/login_text"
                 android:layout_width="350dp"
+                android:layout_below="@id/logo_login"
                 android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
                 android:text="Welcome to StockFlux"
@@ -48,6 +51,8 @@
                 android:id="@+id/email_login_textfield_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="300dp"
+                android:layout_below="@id/login_text"
+                android:layout_centerHorizontal="true"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
@@ -70,6 +75,8 @@
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:layout_below="@id/email_login_textfield_layout"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:hint="Password"
                 app:passwordToggleEnabled="true"
@@ -91,6 +98,8 @@
                 android:id="@+id/forget_password"
                 android:layout_width="308dp"
                 android:layout_height="19dp"
+                android:layout_below="@id/password_login_textfield_layout"
+                android:layout_centerHorizontal="true"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
@@ -102,6 +111,8 @@
                 android:id="@+id/login_button"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
+                android:layout_below="@id/forget_password"
+                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#FF8000"
@@ -109,35 +120,31 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/not_on_stockflux"
+                android:layout_width="305dp"
+                android:layout_height="32dp"
+                android:layout_below="@id/login_button"
+                android:layout_gravity="center"
+                android:text="Not on StockFlux yet ?"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/not_on_stockflux"
-                    android:layout_width="305dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:text="Not on StockFlux yet ?"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/register_text"
-                    android:layout_width="300dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="-55dp"
-                    android:layout_toEndOf="@id/not_on_stockflux"
-                    android:backgroundTint="#E97451"
-                    android:text="@string/register"
-                    android:textColor="#F44336"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:id="@+id/register_text"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_below="@id/login_button"
+                android:layout_marginLeft="-55dp"
+                android:layout_toEndOf="@id/not_on_stockflux"
+                android:backgroundTint="#E97451"
+                android:text="@string/register"
+                android:textColor="#F44336"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-
-        </LinearLayout>
     </ScrollView>
 
     <ProgressBar
