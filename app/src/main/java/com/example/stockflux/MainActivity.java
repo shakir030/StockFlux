@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity{
 
         Business_name = findViewById(R.id.name_of_organisation);
         full_name = findViewById(R.id.login_user);
+        purchase_button = findViewById(R.id.Purchase_button);
+        sales_button = findViewById(R.id.Sales_button);
+        Reports_Button = findViewById(R.id.Reports_button);
+
 
         Query qurey = fGetUser.collection("Users").document(user_id).collection("UsersData");
         qurey.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -63,9 +67,19 @@ public class MainActivity extends AppCompatActivity{
         if(user.isEmailVerified()) {
             warning_verify.setVisibility(View.GONE);
             verify_button.setVisibility(View.GONE);
+            purchase_button.setVisibility(View.VISIBLE);
+            sales_button.setVisibility(View.VISIBLE);
+            Reports_Button.setVisibility(View.VISIBLE);
+            Business_name.setVisibility(View.VISIBLE);
+            full_name.setVisibility(View.VISIBLE);
         } else{
             warning_verify.setVisibility(View.VISIBLE);
             verify_button.setVisibility(View.VISIBLE);
+            Business_name.setVisibility(View.GONE);
+            purchase_button.setVisibility(View.GONE);
+            sales_button.setVisibility(View.GONE);
+            Reports_Button.setVisibility(View.GONE);
+            full_name.setVisibility(View.GONE);
             warning_verify.setText("Please Verify your Account");
             warning_verify.setTextColor(Color.RED);
             verify_button.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +112,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        purchase_button = findViewById(R.id.Purchase_button);
+
         purchase_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +121,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        sales_button = findViewById(R.id.Sales_button);
+
         sales_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +130,6 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-        Reports_Button = findViewById(R.id.Reports_button);
         Reports_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

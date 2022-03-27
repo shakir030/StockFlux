@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.stockflux">
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -11,17 +10,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StockFlux">
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".reset_password"
+            android:exported="false"
+            android:label="Reset Password"
+            android:parentActivityName=".activity_forget_password"/>
         <activity
             android:name=".user_account"
             android:exported="false"
             android:label="User Account"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".profit_loss"
             android:exported="false"
             android:label="Profit / Loss"
-            android:parentActivityName=".reports"/>
+            android:parentActivityName=".reports" />
         <activity
             android:name=".Register"
             android:exported="false"

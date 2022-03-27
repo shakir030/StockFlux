@@ -1,75 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity_sales_home">
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="20dp"
-        app:srcCompat="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/Sales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imageView"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="75dp"
-        android:text="Sales"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/add_sales_menu_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/Sales"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="#ff4500"
-        android:drawableTop="@drawable/ic_baseline_add_24"
-        android:text="Add"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        app:cornerRadius="25sp"
-        app:startIconTint="@color/white"
-        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/view_sales_menu_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/add_sales_menu_button"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#ff4500"
-        android:drawableTop="@drawable/ic_baseline_preview_24"
-        android:text="view"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        app:cornerRadius="25sp"
-        app:startIconTint="@color/white"
-        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginStart="20dp"
+                app:srcCompat="@drawable/logo" />
 
-    <Button
-        android:id="@+id/expense_sales_menu_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#ff4500"
-        android:drawableTop="@drawable/ic_baseline_add_shopping_cart_24"
-        android:text="expenses"
-        android:layout_below="@id/view_sales_menu_button"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        app:cornerRadius="25sp"
-        app:startIconTint="@color/white"
-        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+            <TextView
+                android:id="@+id/Sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="75dp"
+                android:layout_toEndOf="@id/imageView"
+                android:text="Sales"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/add_sales_menu_button"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/Sales"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="100dp"
+                android:backgroundTint="#ff4500"
+                android:drawableTop="@drawable/ic_baseline_add_24"
+                android:text="Add"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                app:cornerRadius="25sp"
+                app:startIconTint="@color/white"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+            <Button
+                android:id="@+id/view_sales_menu_button"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/add_sales_menu_button"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#ff4500"
+                android:drawableTop="@drawable/ic_baseline_preview_24"
+                android:text="view"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                app:cornerRadius="25sp"
+                app:startIconTint="@color/white"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+            <Button
+                android:id="@+id/expense_sales_menu_button"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/view_sales_menu_button"
+                android:layout_marginStart="135dp"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#ff4500"
+                android:drawableTop="@drawable/ic_baseline_add_shopping_cart_24"
+                android:text="expenses"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                app:cornerRadius="25sp"
+                app:startIconTint="@color/white"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

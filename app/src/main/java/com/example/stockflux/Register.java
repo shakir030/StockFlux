@@ -140,6 +140,7 @@ public class Register extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Void unused) {
                                             Toast.makeText(Register.this, "E-Mail Verification has been sent to your E-Mail", Toast.LENGTH_LONG).show();
+                                            fAuth.signOut();
                                             Intent register = new Intent(Register.this,Login.class);
                                             startActivity(register);
                                         }

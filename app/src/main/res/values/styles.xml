@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
-        <item name="colorPrimary">#FF8300</item>
-        <item name="boxStrokeColor">#ff8300</item>
+    <style name="AppTheme" parent="Theme.StockFlux">
+        <item name="colorPrimary">#0B0B0B</item>
+        <item name="boxStrokeColor">#000000</item>
         <item name="boxStrokeWidth">2dp</item>
-        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">#F4511E</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 </resources>

@@ -1,79 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".purchase_menu">
 
-    <Button
-        android:id="@+id/add_purchase_button"
-        android:layout_marginTop="100dp"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/purchase"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="#ff4500"
-        android:drawableTop="@drawable/ic_baseline_add_24"
-        android:text="add"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="25sp"
-        app:startIconTint="@color/white"
-        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/view_purchase_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/add_purchase_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#ff4500"
-        android:drawableTop="@drawable/ic_baseline_preview_24"
-        android:text="view"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="25sp"
-        app:startIconTint="@color/white"
-        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/expense_purchase_button"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/view_purchase_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="#ff4500"
-        android:drawableTop="@drawable/ic_baseline_attach_money_24"
-        android:text="expenses"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="25sp"
-        tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+            <Button
+                android:id="@+id/add_purchase_button"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/purchase"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:backgroundTint="#ff4500"
+                android:drawableTop="@drawable/ic_baseline_add_24"
+                android:text="add"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="25sp"
+                app:startIconTint="@color/white"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
-    <TextView
-        android:id="@+id/purchase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="75dp"
-        android:text="Purchase"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+            <Button
+                android:id="@+id/view_purchase_button"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/add_purchase_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="#ff4500"
+                android:drawableTop="@drawable/ic_baseline_preview_24"
+                android:text="view"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="25sp"
+                app:startIconTint="@color/white"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        app:srcCompat="@drawable/logo" />
-</RelativeLayout>
+            <Button
+                android:id="@+id/expense_purchase_button"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_below="@id/view_purchase_button"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="30dp"
+                android:backgroundTint="#ff4500"
+                android:drawableTop="@drawable/ic_baseline_attach_money_24"
+                android:text="expenses"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:cornerRadius="25sp"
+                tools:ignore="HardcodedText,DuplicateSpeakableTextCheck" />
+
+            <TextView
+                android:id="@+id/purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="210dp"
+                android:layout_marginTop="75dp"
+                android:text="Purchase"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                app:srcCompat="@drawable/logo" />
+        </RelativeLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,15 +17,17 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class activity_forget_password extends AppCompatActivity {
-    private TextInputEditText emailTextField;
-    private Button reset_password_button;
-    private ProgressBar progress_forget_password;
-    private FirebaseAuth fAuth;
+    TextInputEditText emailTextField;
+    Button reset_password_button;
+    ProgressBar progress_forget_password;
+    String Mobile_Number;
+    FirebaseAuth fAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_passowrd);
-        setTitle("Forget Password");
+
         fAuth = FirebaseAuth.getInstance();
         emailTextField = findViewById(R.id.forget_email_textfield);
         reset_password_button = findViewById(R.id.forget_reset_button);
@@ -61,5 +63,5 @@ public class activity_forget_password extends AppCompatActivity {
                 });
             }
         });
-        }
+    }
 }

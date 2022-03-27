@@ -31,7 +31,7 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_filled_purchase_view.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_forget_passowrd.xml" value="0.25" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_login.xml" value="0.221875" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_main.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_main.xml" value="0.21145833333333333" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_main2.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_make_bill_sales.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_navigation_menu.xml" value="0.221875" />
@@ -41,9 +41,10 @@
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_profit_loss.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_profit_loss_table.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_expense_reports.xml" value="0.221875" />
-        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_menu.xml" value="0.221875" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_purchase_menu.xml" value="0.1" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_register.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_reports.xml" value="0.25" />
+        <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_reset_password.xml" value="0.2421875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_add.xml" value="0.221875" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_expense_reports.xml" value="0.20416666666666666" />
         <entry key="..\:/Projects/Projects/app/src/main/res/layout/activity_sales_home.xml" value="0.221875" />
