@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/filter_expense"
+        android:icon="@drawable/filter_data_icon"
+        android:iconTint="@color/white"
+        android:title="Filter Data"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/Name_expense_sort"
+                android:title="Sort By Name">
+                <menu>
+                    <item android:id="@+id/expense_name_ascending"
+                        android:title="Ascending Order"/>
+                    <item android:id="@+id/expense_name_descending"
+                        android:title="Descending Order"/>
+                </menu>
+            </item>
+            <item
+                android:id="@+id/expense_price_sort"
+                android:title="Sort By Price">
+                <menu>
+                    <item android:id="@+id/expense_price_ascending"
+                        android:title="Low to High"/>
+                    <item android:id="@+id/expense_price_descending"
+                        android:title="High to Low"/>
+                </menu>
+            </item>
+            <item android:id="@+id/expense_date_sort"
+                android:title="Sort By Date">
+                <menu>
+                    <item android:id="@+id/expense_date_ascending"
+                        android:title="Ascending Order"/>
+                    <item android:id="@+id/expense_date_descending"
+                        android:title="Descending Order"/>
+                    <item android:id="@+id/expense_date_range"
+                        android:title="Sort By Range"/>
+                </menu>
+            </item>
+        </menu>
+    </item>
+</menu>

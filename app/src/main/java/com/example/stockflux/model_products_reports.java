@@ -1,11 +1,13 @@
 package com.example.stockflux;
 
+import java.util.Date;
+
 public class model_products_reports {
     String product_name;
-    String product_date;
+    Date product_date;
     int product_qty;
 
-    public model_products_reports(String product_name, String product_date, int product_qty) {
+    public model_products_reports(String product_name, Date product_date, int product_qty) {
         this.product_name = product_name;
         this.product_date = product_date;
         this.product_qty = product_qty;
@@ -28,11 +30,11 @@ public class model_products_reports {
         this.product_qty = product_qty;
     }
 
-    public String getProduct_date() {
+    public Date getProduct_date() {
         return product_date;
     }
 
-    public void setProduct_date(String product_date) {
+    public void setProduct_date(Date product_date) {
         this.product_date = product_date;
     }
 

@@ -2,21 +2,18 @@ package com.example.stockflux;
 
 import java.util.Date;
 
-public class model_class_purchase_expense {
-    String purchase_expense_name,purchase_expense_description;
+public class purchase_expense_model {
+    String purchase_expense_name;
     Date purchase_expense_date;
     int purchase_expense_total_price;
 
-    model_class_purchase_expense(){
+    public purchase_expense_model(){
 
     }
-
-    public Date getPurchase_expense_date() {
-        return purchase_expense_date;
-    }
-
-    public void setPurchase_expense_date(Date purchase_expense_date) {
+    public purchase_expense_model(String purchase_expense_name, Date purchase_expense_date, int purchase_expense_total_price) {
+        this.purchase_expense_name = purchase_expense_name;
         this.purchase_expense_date = purchase_expense_date;
+        this.purchase_expense_total_price = purchase_expense_total_price;
     }
 
     public String getPurchase_expense_name() {
@@ -27,12 +24,12 @@ public class model_class_purchase_expense {
         this.purchase_expense_name = purchase_expense_name;
     }
 
-    public String getPurchase_expense_description() {
-        return purchase_expense_description;
+    public Date getPurchase_expense_date() {
+        return purchase_expense_date;
     }
 
-    public void setPurchase_expense_description(String purchase_expense_description) {
-        this.purchase_expense_description = purchase_expense_description;
+    public void setPurchase_expense_date(Date purchase_expense_date) {
+        this.purchase_expense_date = purchase_expense_date;
     }
 
     public int getPurchase_expense_total_price() {

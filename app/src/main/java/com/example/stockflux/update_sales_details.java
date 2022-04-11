@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +28,7 @@ public class update_sales_details extends AppCompatActivity {
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     String user_id = fAuth.getCurrentUser().getUid();
     String document_id,sales_name,sales_id,sales_date,sales_description,purchase_id;
-    int sales_qty,sales_per_price,total_QTY;
+    int sales_qty,sales_per_price,total_QTY,purchase_per_price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +76,14 @@ public class update_sales_details extends AppCompatActivity {
         fStoreUpdate = FirebaseFirestore.getInstance();
         fPurchaseDetails = FirebaseFirestore.getInstance();
 
-        Query query = fPurchaseDetails.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_name",sales_name).whereEqualTo("product_id",purchase_id);
+        Query query = fPurchaseDetails.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_id",purchase_id);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                     model_class_purchase_add_data purchase_data = documentSnapshot.toObject(model_class_purchase_add_data.class);
                     int total_qty_purchase = purchase_data.getProduct_qty();
+                    purchase_per_price = purchase_data.getProduct_per_price();
                     total_QTY = total_qty_purchase + sales_qty;
                     total_qty_update.setText(String.valueOf(total_QTY));
                 }
@@ -119,7 +122,8 @@ public class update_sales_details extends AppCompatActivity {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                             String purchase_document_id = documentSnapshot.getId();
                             int remaining_qty = total_qty_int - check_qty_int;
-                            fPurchaseDetails.collection("Users").document(user_id).collection("addProducts").document(purchase_document_id).update("product_qty",remaining_qty).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            int total_price = remaining_qty*purchase_per_price;
+                            fPurchaseDetails.collection("Users").document(user_id).collection("addProducts").document(purchase_document_id).update("product_qty",remaining_qty,"product_total_price",total_price).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(update_sales_details.this, "Quantity Updated ", Toast.LENGTH_SHORT).show();
@@ -158,6 +162,11 @@ public class update_sales_details extends AppCompatActivity {
                         startActivity(new Intent(update_sales_details.this, activity_sales_view.class));
                         Toast.makeText(update_sales_details.this, "Updated", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(update_sales_details.this, "Cannot Update", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

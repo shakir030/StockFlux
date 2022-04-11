@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:id="@+id/filter"
+    android:icon="@drawable/filter_data_icon"
+    android:iconTint="@color/white"
+    android:title="Filter Data"
+    app:showAsAction="always">
+    <menu>
+        <item
+            android:id="@+id/Name_sort"
+            android:title="Sort By Name">
+            <menu>
+                <item android:id="@+id/name_ascending"
+                    android:title="Ascending Order"/>
+                <item android:id="@+id/name_descending"
+                    android:title="Descending Order"/>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/price_sort"
+            android:title="Sort By Price">
+            <menu>
+                <item android:id="@+id/price_ascending"
+                    android:title="Low to High"/>
+                <item android:id="@+id/price_descending"
+                    android:title="High to Low"/>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/qty_sort"
+            android:title="Sort By Quantity">
+            <menu>
+                <item android:id="@+id/qty_ascending"
+                    android:title="Low to High"/>
+                <item android:id="@+id/qty_descending"
+                    android:title="High to Low"/>
+            </menu>
+        </item>
+        <item android:id="@+id/date_sort"
+            android:title="Sort By Date">
+            <menu>
+                <item android:id="@+id/date_ascending"
+                    android:title="Ascending Order"/>
+                <item android:id="@+id/date_descending"
+                    android:title="Descending Order"/>
+                <item android:id="@+id/date_range"
+                    android:title="Sort By Range"/>
+            </menu>
+        </item>
+    </menu>
+</item>
+</menu>

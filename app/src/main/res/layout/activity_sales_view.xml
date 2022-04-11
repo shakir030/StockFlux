@@ -1,389 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity_sales_view">
 
-    <TextView
-        android:id="@+id/sales_view_text_date"
-        android:layout_width="170dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:paddingTop="15dp"
-        android:text="Enter Date :- "
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/date_select_sales_view"
-        android:layout_width="170dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@id/sales_view_text_date"
-        android:background="@drawable/text_border"
-        android:hint="Select date."
-        android:padding="10dp"
+        android:id="@+id/sales_range_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="Select Range of Date"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColorHint="#9A8484"
-        android:textSize="25sp" />
-
-    <Button
-        android:id="@+id/select_sales_date_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/date_select_sales_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/black"
-        android:drawableRight="@drawable/date_icon"
-        android:drawableTint="@color/white"
-        android:text="Select Date" />
-
-    <TextView
-        android:id="@+id/sales_name_select_text"
-        android:layout_width="170dp"
-        android:layout_height="65dp"
-        android:layout_below="@id/select_sales_date_button"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:paddingTop="15dp"
-        android:text="Select Product :- "
-        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
-    <Spinner
-        android:id="@+id/spinner_add_view_sales"
-        android:layout_width="170dp"
-        android:layout_height="65dp"
-        android:layout_below="@id/select_sales_date_button"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@id/sales_name_select_text"
-        android:contentDescription="Choose Catogry" />
+    <LinearLayout
+        android:id="@+id/sales_from_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sales_range_heading"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_sales_view_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="From :- "
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sales_from_date_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:hint="From Date"
+            app:startIconTint="#ff8300"
+            app:startIconDrawable="@drawable/date_icon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sales_from_date_data"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                tools:ignore="Deprecated" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sales_to_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sales_from_linear"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_view_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="25dp"
+            android:text="To :- "
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/sales_to_date_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:hint="To Date"
+            app:startIconTint="#ff8300"
+            app:startIconDrawable="@drawable/date_icon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sales_to_date_data"
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                tools:ignore="Deprecated" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/search_button_sales_view"
-        android:layout_width="wrap_content"
+        android:id="@+id/submit_sales_range_date"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sales_name_select_text"
+        android:layout_below="@id/sales_to_linear"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/black"
-        android:drawableRight="@drawable/icon_search"
-        android:drawableTint="@color/white"
-        android:visibility="gone"
-        android:text="Search" />
+        android:layout_marginBottom="40dp"
+        android:text="Submit"
+        android:textSize="15sp"
+        android:visibility="gone"/>
 
-    <TextView
-        android:id="@+id/Details_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search_button_sales_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="---- Details of Products ----"
-        android:textColor="#ff4500"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/view_recycle"
+        android:layout_below="@id/submit_sales_range_date"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/Details_text_view">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_sales_view"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/teal_200"
-                android:visibility="gone">
-
-                <RelativeLayout
-                    android:id="@+id/card_view_relative_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/sales_view_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Name of Product :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_name"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/sales_view_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_name"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="ID of Product :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_name"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_id"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/sales_view_qty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_id"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Quantity of Product :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_qty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_id"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_qty"
-                        android:inputType="number"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <TextView
-                        android:id="@+id/sales_view_per_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_qty"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Per/Price of Product :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_per_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_qty"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_qty"
-                        android:inputType="number"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-
-                    <TextView
-                        android:id="@+id/sales_view_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_per_price"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Date :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_per_price"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_date"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/sales_view_total_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_date"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Total Price of Product :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_total_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_date"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/sales_view_total_price"
-                        android:inputType="number"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <TextView
-                        android:id="@+id/sales_view_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_total_price"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Description of Product :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/data_sales_view_description"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_total_price"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/sales_view_description"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/purchase_id_sales_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/sales_view_description"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:text="Purchase ID :- "
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="TouchTargetSizeCheck" />
-
-                    <TextView
-                        android:id="@+id/data_purchase_id_sales_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/data_sales_view_description"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/purchase_id_sales_view"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <Button
-                        android:id="@+id/delete_sales_data_button"
-                        android:layout_width="40dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/purchase_id_sales_view"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:backgroundTint="#C50404"
-                        android:drawableTop="@drawable/delete_icon"
-                        android:drawableTint="@color/white"
-                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-
-                    <Button
-                        android:id="@+id/make_bill"
-                        android:layout_width="150dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/purchase_id_sales_view"
-                        android:layout_centerInParent="true"
-                        android:layout_marginStart="55dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/delete_sales_data_button"
-                        android:text="Make Bill" />
-
-                    <Button
-                        android:id="@+id/update_sales_add_button"
-                        android:layout_width="40dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@id/purchase_id_sales_view"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_toEndOf="@id/make_bill"
-                        android:backgroundTint="#04A21E"
-                        android:drawableTop="@drawable/edit_icon"
-                        android:drawableTint="@color/white"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <EditText
-                android:id="@+id/costumer_name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/card_sales_view"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:hint="Enter Costomer Name"
-                android:visibility="gone"
-                tools:ignore="TouchTargetSizeCheck" />
-
-            <Button
-                android:id="@+id/bill_continue"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_below="@id/card_sales_view"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/costumer_name"
-                android:backgroundTint="@color/teal_200"
-                android:drawableTop="@drawable/continue_icon"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/black"
-                android:visibility="gone"
-                app:cornerRadius="100dp"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-        </RelativeLayout>
-    </ScrollView>
-
-
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp" />
 </RelativeLayout>

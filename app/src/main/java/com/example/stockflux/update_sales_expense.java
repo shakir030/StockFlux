@@ -1,5 +1,6 @@
 package com.example.stockflux;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -85,6 +86,8 @@ public class update_sales_expense extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         //startActivity(new Intent(update_sales_expense.this,sales_expense_reports.class));
                         Toast.makeText(update_sales_expense.this, "Updated", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(update_sales_expense.this,sales_expense_reports.class));
+
                     }
                 });
 

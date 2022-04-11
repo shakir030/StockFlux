@@ -31,20 +31,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/Expense_reports"
+                android:layout_above="@id/purchase_expense_reports_button"
                 android:layout_marginStart="-5dp"
-                android:textColor="@color/black"
                 android:layout_marginBottom="48dp"
                 android:layout_toEndOf="@id/Logo_Reports"
                 android:text="Reports"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="35sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/Expense_reports"
+                android:id="@+id/purchase_expense_reports_button"
                 android:layout_width="350dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/Logo_Reports"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
@@ -53,7 +53,24 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#039BE5"
-                android:text="Expense Reports"
+                android:text="Purchase Expense Reports"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:cornerRadius="20dp" />
+
+            <Button
+                android:id="@+id/sales_expense_reports_button"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/purchase_expense_reports_button"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="#039BE5"
+                android:text="Sales Expense Reports"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:cornerRadius="20dp" />
@@ -61,8 +78,8 @@
             <Button
                 android:id="@+id/Products_reports"
                 android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/Expense_reports"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sales_expense_reports_button"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
@@ -71,23 +88,6 @@
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#039BE5"
                 android:text="Product's Reports"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:cornerRadius="20dp" />
-
-            <Button
-                android:id="@+id/Profit_Loss"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_below="@id/Products_reports"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="#039BE5"
-                android:text="Profit / Loss"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:cornerRadius="20dp" />

@@ -1,8 +1,11 @@
 package com.example.stockflux;
 
+import java.util.Date;
+
 public class model_class_purchase_add_data {
-    private String product_name,product_id,product_date,product_description;
-    private int product_qty,product_per_price,product_total_price;
+     String product_name,product_id,product_description;
+     Date product_date;
+     int product_qty,product_per_price,product_total_price;
 
     public model_class_purchase_add_data(){
 
@@ -24,11 +27,11 @@ public class model_class_purchase_add_data {
         this.product_id = product_id;
     }
 
-    public String getProduct_date() {
+    public Date getProduct_date() {
         return product_date;
     }
 
-    public void setDate(String product_date) {
+    public void setProduct_date(Date product_date) {
         this.product_date = product_date;
     }
 
@@ -57,11 +60,10 @@ public class model_class_purchase_add_data {
     }
 
     public int getProduct_total_price() {
-        product_total_price = product_qty * product_per_price;
-        return product_total_price;
+        return product_qty*product_per_price;
     }
 
     public void setProduct_total_price(int product_total_price) {
-        this.product_total_price = product_total_price;
+        this.product_total_price =  product_total_price;
     }
 }

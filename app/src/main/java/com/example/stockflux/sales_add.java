@@ -23,8 +23,11 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class sales_add extends AppCompatActivity {
     public static final String TAG = "AddSales";
@@ -38,6 +41,7 @@ public class sales_add extends AppCompatActivity {
     String user_id = fAuth.getCurrentUser().getUid();
     String sales_document_id,product_id;
     int remaining_qty,total_price;
+    Date sales_date;
     ArrayList<String> sales_values = new ArrayList<String>();
 
     @Override
@@ -90,7 +94,9 @@ public class sales_add extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sales_add_submit_button.setVisibility(View.VISIBLE);
+                
                 querydata();
+
                 fStoreSalesData.collection("Users").document(user_id).collection("addProducts").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -139,6 +145,13 @@ public class sales_add extends AppCompatActivity {
                 String sales_add_qty = product_add_qty.getText().toString();
                 String per_price_string = product_add_per_price.getText().toString();
                 String sales_add_date = product_add_date.getText().toString().trim();
+
+                try {
+                    sales_date = new SimpleDateFormat("dd/MM/yyyy").parse(sales_add_date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 int sales_qty_int = Integer.parseInt(product_add_qty.getText().toString());
                 int total_qty_int = Integer.parseInt(total_qty.getText().toString());
                 remaining_qty = total_qty_int - sales_qty_int;
@@ -171,16 +184,27 @@ public class sales_add extends AppCompatActivity {
                     product_add_qty.requestFocus();
                     return;
                 }
-
-                Query check_id = fStoreSalesData.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("id",sales_add_id);
-                check_id.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                Query check_name = fStoreSalesData.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date",sales_date).whereEqualTo("name",sales_add_name);
+                check_name.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            product_add_id.setError("Enter Another ID");
-                            product_add_id.requestFocus();
-                        } else {
-                            AddData(sales_document_id); //adds data to firestore databasee
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            product_add_name.setError("Enter another name");
+                            product_add_name.requestFocus();
+                        }
+                        else {
+                            Query check_id = fStoreSalesData.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("id",sales_add_id);
+                            check_id.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                        product_add_id.setError("Enter Another ID");
+                                        product_add_id.requestFocus();
+                                    } else {
+                                        AddData(sales_document_id); //adds data to firestore databasee
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -213,6 +237,7 @@ public class sales_add extends AppCompatActivity {
 
         String text = spinner_list_name.getSelectedItem().toString();
 
+
         Query query = fStoreSalesData.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_name", text);
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -227,7 +252,6 @@ public class sales_add extends AppCompatActivity {
                         product_id = data_view.getProduct_id();
                         String product_name = data_view.getProduct_name();
                         product_add_name.setText(product_name);
-                        product_add_name.setEnabled(false);
 
                         int product_qty = data_view.getProduct_qty();
                         total_qty.setText(String.valueOf(product_qty));
@@ -244,14 +268,25 @@ public class sales_add extends AppCompatActivity {
     }
     private void AddData(String id) {
 
+
         model_class_sales_add add_data = new model_class_sales_add();
         String sales_add_name = product_add_name.getText().toString().trim();
         String sales_add_id = product_add_id.getText().toString().trim();
-        String sales_add_date = product_add_date.getText().toString().trim();
+        String date = product_add_date.getText().toString().trim();
+
+        Date sales_add_date = null;
+        try {
+            sales_add_date = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String sales_add_description = product_add_description.getText().toString().trim();
         int sales_add_qty = Integer.parseInt(product_add_qty.getText().toString());
         int sales_per_price_add = Integer.parseInt(product_add_per_price.getText().toString().trim());
         int sales_add_total_price = add_data.getTotal_Price();
+
+
 
 
         add_data.setName(sales_add_name);
@@ -275,7 +310,8 @@ public class sales_add extends AppCompatActivity {
                 product_add_per_price.setText(null);
                 product_add_total_price.setText(null);
                 product_add_description.setText(null);
-                sales_add_submit_button.setEnabled(false);
+                sales_add_submit_button.setVisibility(View.GONE);
+
 
                 fStoreSalesData.collection("Users").document(user_id).collection("addProducts").document(id).update("product_qty", remaining_qty).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

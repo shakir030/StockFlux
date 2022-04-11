@@ -3,6 +3,7 @@
     package="com.example.stockflux">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -12,10 +13,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".sales_expense_item_details"
+            android:exported="false"
+            android:label="Sales Expenses Details"
+            android:parentActivityName=".sales_expense_reports" />
+        <activity
+            android:name=".purchase_expense_item_details"
+            android:exported="false"
+            android:label="Purchase Expenses Details"
+            android:parentActivityName=".purchase_expense_reports" />
+        <activity
+            android:name=".sales_product_view_details"
+            android:exported="false"
+            android:label="Sales Product View Details"
+            android:parentActivityName=".activity_sales_view"/>
+        <activity
+            android:name=".prodcut_card_view_details"
+            android:exported="false"
+            android:label="Purchase Products Details"
+            android:parentActivityName=".purchase_view" />
+        <activity
+            android:name=".purchase_view"
+            android:exported="false"
+            android:label="Purchase Details"
+            android:parentActivityName=".purchase_menu" />
+        <activity
             android:name=".reset_password"
             android:exported="false"
             android:label="Reset Password"
-            android:parentActivityName=".activity_forget_password"/>
+            android:parentActivityName=".activity_forget_password" />
         <activity
             android:name=".user_account"
             android:exported="false"
@@ -57,11 +83,6 @@
             android:name=".activity_add"
             android:exported="false"
             android:label="Purchase Add"
-            android:parentActivityName=".purchase_menu" />
-        <activity
-            android:name=".activity_view"
-            android:exported="false"
-            android:label="Purchase Items View"
             android:parentActivityName=".purchase_menu" />
         <activity
             android:name=".activity_expense"
@@ -138,9 +159,6 @@
             android:exported="false"
             android:label="Expenses Reports"
             android:parentActivityName=".reports" />
-        <activity
-            android:name=".Navigation_Menu"
-            android:exported="false" />
     </application>
 
 </manifest>

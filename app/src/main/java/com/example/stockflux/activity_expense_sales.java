@@ -20,7 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class activity_expense_sales extends AppCompatActivity {
     public static final String TAG = "AddSalesExpenses";
@@ -118,11 +121,19 @@ public class activity_expense_sales extends AppCompatActivity {
     public void AddExpenseData(String expense_sales_name) {
         model_class_sales_expenses add_sales_expense = new model_class_sales_expenses();
         expense_sales_name = sales_expense_name.getText().toString().trim();
-        String expense_date = sales_expense_date.getText().toString().trim();
+        String date = sales_expense_date.getText().toString().trim();
         String expense_description = sales_expense_description.getText().toString().trim();
         int expense_total_price = Integer.parseInt(sales_expense_total_price.getText().toString().trim());
 
         add_sales_expense.setName(expense_sales_name);
+
+        Date expense_date = null;
+        try {
+            expense_date = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         add_sales_expense.setDate(expense_date);
         add_sales_expense.setTotal_Price(expense_total_price);
         add_sales_expense.setDescription(expense_description);

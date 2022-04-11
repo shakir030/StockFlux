@@ -1,141 +1,584 @@
 package com.example.stockflux;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class activity_sales_view extends AppCompatActivity {
-    EditText costumer_name;
-    TextView select_sales_date, data_sales_name, data_sales_id, data_sales_qty, data_sales_per_price, data_sales_date, data_sales_total_price, data_sales_description,data_purchase_id;
-    Button search_button_sales, select_date_button_sales, delete_data_button_sales, update_data_button_sales, bill_generate_button, continue_button;
-    Spinner spinner_list_name_product_sales;
-    MaterialCardView card_view_sales;
-    DatePickerDialog datePickerDialog;
-    FirebaseFirestore fSalesView;
+    RecyclerView recyclerView;
+    TextView heading_sales_text;
+    TextInputEditText from_sales_date,to_sales_date;
+    LinearLayout from_sales_linear,to_sales_linear;
+    Button submit_date_sales_range;
+    ArrayList<sales_view_model> productArrayList;
+    sales_view_adapter productViewAdapter;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     String user_id = fAuth.getCurrentUser().getUid();
-    String document_id;
-    int purchase_qty,sales_qty,total_qty_purchase;
-    ArrayList<String> values_store_sales = new ArrayList<String>();
+    ProgressDialog progressDialog;
+    DatePickerDialog datePickerDialog;
+    Date sales_from_date,sales_to_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_view);
 
-        data_sales_name = findViewById(R.id.data_sales_view_name);
-        data_sales_id = findViewById(R.id.data_sales_view_id);
-        data_sales_qty = findViewById(R.id.data_sales_view_qty);
-        data_sales_per_price = findViewById(R.id.data_sales_view_per_price);
-        data_sales_date = findViewById(R.id.data_sales_view_date);
-        data_sales_total_price = findViewById(R.id.data_sales_view_total_price);
-        data_sales_description = findViewById(R.id.data_sales_view_description);
-        select_sales_date = findViewById(R.id.date_select_sales_view);
-        search_button_sales = findViewById(R.id.search_button_sales_view);
-        select_date_button_sales = findViewById(R.id.select_sales_date_button);
-        spinner_list_name_product_sales = findViewById(R.id.spinner_add_view_sales);
-        card_view_sales = findViewById(R.id.card_sales_view);
-        bill_generate_button = findViewById(R.id.make_bill);
-        data_purchase_id = findViewById(R.id.data_purchase_id_sales_view);
-        costumer_name = findViewById(R.id.costumer_name);
-        continue_button = findViewById(R.id.bill_continue);
+        heading_sales_text = findViewById(R.id.sales_range_heading);
+        from_sales_linear = findViewById(R.id.sales_from_linear);
+        to_sales_linear = findViewById(R.id.sales_to_linear);
+        from_sales_date = findViewById(R.id.sales_from_date_data);
+        to_sales_date = findViewById(R.id.sales_to_date_data);
+        submit_date_sales_range = findViewById(R.id.submit_sales_range_date);
 
 
-        fSalesView = FirebaseFirestore.getInstance(); // get firestore data instance
 
-        // select date and values to spinner data view
-        select_date_button_sales.setOnClickListener(new View.OnClickListener() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Fetching Data ..");
+        progressDialog.show();
+
+
+        recyclerView = findViewById(R.id.view_recycle);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        productArrayList = new ArrayList<sales_view_model>();
+
+
+
+        EventChangeListner();
+
+
+
+    }
+
+    private void EventChangeListner() {
+        db.collection("Users").document(user_id).collection("AddSalesData").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onClick(View view) {
-                String date_pick = select_sales_date.getText().toString().trim();
-                Query query = fSalesView.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date", date_pick);
-                query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                model_class_sales_add sales_view = documentSnapshot.toObject(model_class_sales_add.class);
-                                String sales_name = sales_view.getName();
-                                values_store_sales.add(sales_name);
-                                ArrayAdapter<String> SpinnerAdapter = new ArrayAdapter<String>(activity_sales_view.this, android.R.layout.simple_spinner_dropdown_item, values_store_sales);
-                                spinner_list_name_product_sales.setAdapter(SpinnerAdapter);
-                                search_button_sales.setVisibility(View.VISIBLE);
-                            }
-                        } else {
-                            card_view_sales.setVisibility(View.GONE);
-                            search_button_sales.setVisibility(View.GONE);
-                            costumer_name.setVisibility(View.GONE);
-                            continue_button.setVisibility(View.GONE);
-                            spinner_list_name_product_sales.setAdapter(null);
-                            Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
-                        }
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
                     }
-                });
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchmenu,menu);
+        MenuItem item=menu.findItem(R.id.search);
+        SearchView searchView = (SearchView)item.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search Here.. !!");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                productViewAdapter.getFilter().filter(s);
+                return false;
             }
         });
 
-        search_button_sales.setOnClickListener(new View.OnClickListener() {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.filter_data,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.name_ascending:
+                order_by_name_ascending();
+                return true;
+            case R.id.name_descending:
+                order_by_name_descending();
+                return true;
+
+            case R.id.price_ascending:
+                order_by_price_low_high();
+                return true;
+
+            case R.id.price_descending:
+                order_by_price_high_low();
+                return true;
+
+            case R.id.qty_ascending:
+                order_by_qty_low_high();
+                return true;
+
+            case R.id.qty_descending:
+                order_by_qty_high_low();
+                return true;
+
+            case R.id.date_ascending:
+                order_by_date_ascending();
+                return true;
+            case R.id.date_descending:
+                order_by_date_descending();
+                return true;
+            case R.id.date_range:
+                order_by_date_range();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+    private void order_by_name_ascending()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("name", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onClick(View view) {
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+                
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
 
-                querydata();
+                if(error != null){
 
-                String date_pick = select_sales_date.getText().toString().trim();
-
-                Query rquery = fSalesView.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date", date_pick);
-                rquery.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()) {
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                model_class_sales_add data_sales_view = documentSnapshot.toObject(model_class_sales_add.class);
-                                String product_name = data_sales_view.getName();
-                                values_store_sales.remove(product_name);
-                                ArrayAdapter<String> SpinnerAdapter = new ArrayAdapter<String>(activity_sales_view.this, android.R.layout.simple_spinner_dropdown_item, values_store_sales);
-                                spinner_list_name_product_sales.setAdapter(SpinnerAdapter);
-                                search_button_sales.setVisibility(View.GONE);
-                                costumer_name.setVisibility(View.GONE);
-                                continue_button.setVisibility(View.GONE);
-                            }
-                        } else {
-                            search_button_sales.setVisibility(View.GONE);
-                            costumer_name.setVisibility(View.GONE);
-                            continue_button.setVisibility(View.GONE);
-                            Toast.makeText(activity_sales_view.this, "No Data Found Button", Toast.LENGTH_SHORT).show();
-                        }
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
                     }
-                });
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
             }
         });
-        select_sales_date.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void order_by_name_descending()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("name", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onClick(View v) {
-                costumer_name.setVisibility(View.GONE);
-                continue_button.setVisibility(View.GONE);
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_price_low_high()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("total_Price", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_price_high_low()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("total_Price", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_qty_low_high()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("quantity", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_qty_high_low()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("total_Price", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_date_ascending()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("date", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_date_descending()
+    {
+        productArrayList.clear();
+        heading_sales_text.setVisibility(View.GONE);
+        from_sales_linear.setVisibility(View.GONE);
+        to_sales_linear.setVisibility(View.GONE);
+        submit_date_sales_range.setVisibility(View.GONE);
+
+        db.collection("Users").document(user_id).collection("AddSalesData").orderBy("date", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(value.isEmpty()){
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(value.isEmpty()){
+                    progressDialog.dismiss();
+                    Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+
+                if(error != null){
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("TAG", "Database Error "+ error.getMessage());
+                    return;
+
+                }
+                for (DocumentChange dc :value.getDocumentChanges()){
+                    if(dc.getType() == DocumentChange.Type.ADDED){
+                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                    }
+                    productViewAdapter = new sales_view_adapter(activity_sales_view.this,productArrayList);
+                    recyclerView.setAdapter(productViewAdapter);
+                    productViewAdapter.notifyDataSetChanged();
+
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                    }
+                }
+            }
+        });
+    }
+
+    private void order_by_date_range()
+    {
+        productArrayList.clear();
+        recyclerView.setVisibility(View.GONE);
+        heading_sales_text.setVisibility(View.VISIBLE);
+        from_sales_linear.setVisibility(View.VISIBLE);
+        to_sales_linear.setVisibility(View.VISIBLE);
+        submit_date_sales_range.setVisibility(View.VISIBLE);
+
+
+        from_sales_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 final Calendar c = Calendar.getInstance();
                 int mYear = c.get(Calendar.YEAR);
                 int mMonth = c.get(Calendar.MONTH);
@@ -146,183 +589,108 @@ public class activity_sales_view extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                select_sales_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                from_sales_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
             }
         });
 
-        delete_data_button_sales = findViewById(R.id.delete_sales_data_button);
-        delete_data_button_sales.setOnClickListener(new View.OnClickListener() {
-            String purchase_document_id;
+        to_sales_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String p_name = data_sales_name.getText().toString().trim();
-                String p_id = data_purchase_id.getText().toString().trim();
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR);
+                int mMonth = c.get(Calendar.MONTH);
+                int mDay = c.get(Calendar.DAY_OF_MONTH);
+                datePickerDialog = new DatePickerDialog(activity_sales_view.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-                sales_qty = Integer.parseInt(data_sales_qty.getText().toString());
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                to_sales_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
-                Query query = fSalesView.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_name",p_name).whereEqualTo("product_id",p_id);
-                query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                            purchase_document_id = documentSnapshot.getId();
-                            model_class_purchase_add_data purchase_data = documentSnapshot.toObject(model_class_purchase_add_data.class);
-                            purchase_qty = purchase_data.getProduct_qty();
-                            total_qty_purchase = purchase_qty + sales_qty;
-
-                            fSalesView.collection("Users").document(user_id).collection("addProducts").document(purchase_document_id).update("product_qty",total_qty_purchase).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(activity_sales_view.this, "Updated", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    }
-                });
-
-
-                costumer_name.setVisibility(View.GONE);
-                continue_button.setVisibility(View.GONE);
-                delete_data(document_id);
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
         });
 
-        costumer_name = findViewById(R.id.costumer_name);
-        continue_button = findViewById(R.id.bill_continue);
-        bill_generate_button.setOnClickListener(new View.OnClickListener() {
+        submit_date_sales_range.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                costumer_name.setVisibility(View.VISIBLE);
-                continue_button.setVisibility(View.VISIBLE);
-
-
-                String name = data_sales_name.getText().toString().trim();
-                String id = data_sales_id.getText().toString().trim();
-                int qty = Integer.parseInt(data_sales_qty.getText().toString());
-                int per_price = Integer.parseInt(data_sales_per_price.getText().toString());
-                int total_price = Integer.parseInt(data_sales_total_price.getText().toString().trim());
-                continue_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent continue_bill = new Intent(activity_sales_view.this, make_bill_sales.class);
-                        String costumer_name_text = costumer_name.getText().toString().trim();
-                        continue_bill.putExtra("costumer_name", costumer_name_text);
-                        continue_bill.putExtra("product_name", name);
-                        continue_bill.putExtra("Bill_id",id);
-                        continue_bill.putExtra("product_qty", qty);
-                        continue_bill.putExtra("product_per_price", per_price);
-                        continue_bill.putExtra("product_total_price", total_price);
-                        startActivity(continue_bill);
-                    }
-                });
-            }
-        });
-
-        update_data_button_sales = findViewById(R.id.update_sales_add_button);
-        update_data_button_sales.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                update_data(document_id);
-            }
-        });
-    }
-
-
-    public void querydata() {
-        String date_pick = select_sales_date.getText().toString().trim();
-        String text = spinner_list_name_product_sales.getSelectedItem().toString();
-
-        costumer_name.setVisibility(View.GONE);
-        continue_button.setVisibility(View.GONE);
-
-        Query query = fSalesView.collection("Users").document(user_id).collection("AddSalesData").whereEqualTo("date", date_pick).whereEqualTo("name", text);
-        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                StringBuilder builder = new StringBuilder();
-                if (queryDocumentSnapshots.isEmpty()) {
-                    Toast.makeText(activity_sales_view.this, "no data found", Toast.LENGTH_SHORT).show();
-                    card_view_sales.setVisibility(View.GONE);
-                } else {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        document_id = documentSnapshot.getId();
-                        model_class_sales_add data_sales_view = documentSnapshot.toObject(model_class_sales_add.class);
-                        String product_name = data_sales_view.getName();
-                        card_view_sales.setVisibility(View.VISIBLE);
-                        data_sales_name.setText(product_name);
-
-                        String product_id = data_sales_view.getID();
-                        data_sales_id.setText(product_id);
-
-                        int product_qty = data_sales_view.getQuantity();
-                        data_sales_qty.setText(String.valueOf(product_qty));
-
-                        int product_per_price = data_sales_view.getPer_price();
-                        data_sales_per_price.setText(String.valueOf(product_per_price));
-
-                        int product_total_price = data_sales_view.getTotal_Price();
-                        data_sales_total_price.setText(String.valueOf(product_total_price));
-
-
-                        String product_date = data_sales_view.getDate();
-                        data_sales_date.setText(product_date);
-
-
-                        String product_description = data_sales_view.getDescription();
-                        data_sales_description.setText(product_description);
-
-                        String purchase_ID = data_sales_view.getPurchase_ID();
-                        data_purchase_id.setText(purchase_ID);
-
-                    }
+                to_sales_date.setError(null);
+                if(String.valueOf(from_sales_date.getText()).isEmpty()){
+                    from_sales_date.setError("Enter Date");
+                    from_sales_date.requestFocus();
+                    return;
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(activity_sales_view.this, "Enter Both Details", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+                if(String.valueOf(to_sales_date.getText()).isEmpty()){
+                    to_sales_date.setError("Enter Date");
+                    to_sales_date.requestFocus();
+                    return;
+                }
 
-    public void delete_data(String id) {
+                productArrayList.clear();
 
-        fSalesView.collection("Users").document(user_id).collection("AddSalesData").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(activity_sales_view.this, "Doucment Deleted", Toast.LENGTH_SHORT).show();
-                card_view_sales.setVisibility(View.GONE);
-            }
-        });
-    }
+                String from_date_string = from_sales_date.getText().toString();
+                String to_date_string = to_sales_date.getText().toString();
 
-    public void update_data(String id) {
-        fSalesView.collection("Users").document(user_id).collection("AddSalesData").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Intent update = new Intent(activity_sales_view.this, update_sales_details.class);
-                String document_id = id.toString().trim();
-                String name = data_sales_name.getText().toString().trim();
-                String sales_id = data_sales_id.getText().toString().trim();
-                String purchase_id = data_purchase_id.getText().toString().trim();
-                int qty = Integer.parseInt(data_sales_qty.getText().toString());
-                int per_price = Integer.parseInt(data_sales_per_price.getText().toString());
-                int total_price = Integer.parseInt(data_sales_total_price.getText().toString().trim());
-                String date = data_sales_date.getText().toString().trim();
-                String description = data_sales_description.getText().toString().trim();
-                update.putExtra("doucmentid", document_id);
-                update.putExtra("salesname", name);
-                update.putExtra("salesid", sales_id);
-                update.putExtra("purchaseid",purchase_id);
-                update.putExtra("sales_qty", qty);
-                update.putExtra("sales_per_price", per_price);
-                update.putExtra("sales_total_price", total_price);
-                update.putExtra("salesdate", date);
-                update.putExtra("salesdescription", description);
-                startActivity(update);
+                try {
+                    sales_from_date = new SimpleDateFormat("dd/MM/yyyy").parse(from_date_string);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                try{
+                    sales_to_date = new SimpleDateFormat("dd/MM/yyyy").parse(to_date_string);
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
+
+                if (sales_to_date.before(sales_from_date)) {
+                    to_sales_date.setError("Select Appropriate Date");
+                    to_sales_date.requestFocus();
+                    recyclerView.setAdapter(null);
+                }
+
+
+                db.collection("Users").document(user_id).collection("AddSalesData").whereGreaterThanOrEqualTo("date",sales_from_date).whereLessThanOrEqualTo("date",sales_to_date).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                            if(value.isEmpty()){
+                                progressDialog.dismiss();
+                                recyclerView.setVisibility(View.GONE);
+                                Toast.makeText(activity_sales_view.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                recyclerView.setVisibility(View.VISIBLE);
+                                if (error != null) {
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                    }
+
+                                    Log.e("TAG", "Database Error " + error.getMessage());
+                                    return;
+
+                                }
+                                for (DocumentChange dc : value.getDocumentChanges()) {
+                                    if (dc.getType() == DocumentChange.Type.ADDED) {
+                                        productArrayList.add(dc.getDocument().toObject(sales_view_model.class));
+                                    }
+
+                                    productViewAdapter = new sales_view_adapter(activity_sales_view.this, productArrayList);
+                                    recyclerView.setAdapter(productViewAdapter);
+                                    productViewAdapter.notifyDataSetChanged();
+                                    if (progressDialog.isShowing()) {
+                                        progressDialog.dismiss();
+                                    }
+                                }
+                            }
+                    }
+                });
             }
         });
     }

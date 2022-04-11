@@ -3,6 +3,9 @@ package com.example.stockflux;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,8 +50,7 @@ public class product_reports extends AppCompatActivity {
         //adapter = new product_reports_adapter(this,getList());
         // recycle_view.setAdapter(adapter);
         product_list = new ArrayList<model_products_reports>();
-        adapter = new product_reports_adapter(product_reports.this, product_list);
-        recycle_view.setAdapter(adapter);
+
         EventChangeListner();
 
 
@@ -69,11 +71,35 @@ public class product_reports extends AppCompatActivity {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
                         product_list.add(dc.getDocument().toObject(model_products_reports.class));
                     }
+                    adapter = new product_reports_adapter(product_reports.this, product_list);
+                    recycle_view.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     if (progress.isShowing())
                         progress.dismiss();
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchmenu,menu);
+        MenuItem search_item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) search_item.getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setQueryHint("Search Here !!");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

@@ -1,7 +1,10 @@
 package com.example.stockflux;
 
+import java.util.Date;
+
 public class model_class_sales_add {
-    String Name,ID,Date,Description,Purchase_ID;
+    String Name,ID,Description,Purchase_ID;
+    Date Date;
     int Quantity,Total_Price,per_price;
 
 
@@ -27,7 +30,7 @@ public class model_class_sales_add {
         this.ID = ID;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return Date;
     }
 
@@ -57,7 +60,7 @@ public class model_class_sales_add {
     public void setTotal_Price(int total_Price) {
         Total_Price = total_Price;
     }
-    public void setDate(String date) {
+    public void setDate(Date date) {
         Date = date;
     }
     public int getPer_price() {

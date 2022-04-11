@@ -115,6 +115,7 @@
                 android:textAllCaps="true"
                 android:textColorHint="#9A8484"
                 android:textSize="25sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/purchase_add_totalprice_layout"
                 android:layout_below="@id/purchase_add_per_price_layout"

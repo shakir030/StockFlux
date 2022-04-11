@@ -20,7 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class activity_add extends AppCompatActivity {
     public static final String TAG = "AddPurchase";
@@ -31,6 +34,8 @@ public class activity_add extends AppCompatActivity {
     private FirebaseFirestore db;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();;
     String user_id = fAuth.getCurrentUser().getUid();
+    Date date;
+    String dated_formate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,7 @@ public class activity_add extends AppCompatActivity {
         product_add_date = findViewById(R.id.purchase_add_date);
         product_add_total_price = findViewById(R.id.purchase_add_totalprice);
         product_add_description = findViewById(R.id.purchase_add_description);
+
 
         add_purchase_reset_button = findViewById(R.id.purchase_add_reset_button);
         //clear the values entered in textfield
@@ -95,6 +101,7 @@ public class activity_add extends AppCompatActivity {
                 if (purchase_add_date.isEmpty()) {
                     product_add_date.setError("Enter Date !!");
                     product_add_date.requestFocus();
+                    return;
                 }
 
                 //checking name is already presented in same date ..
@@ -153,19 +160,27 @@ public class activity_add extends AppCompatActivity {
     {
 
         model_class_purchase_add_data add_data = new model_class_purchase_add_data();
-        String purchase_add_name = product_add_name.getText().toString().trim();
+        String purchase_add_name = product_add_name.getText().toString().trim() + " "+product_add_id.getText().toString().trim();
+        Toast.makeText(this, purchase_add_name, Toast.LENGTH_SHORT).show();
         String purchase_add_id = product_add_id.getText().toString().trim();
         String purchase_add_date = product_add_date.getText().toString().trim();
         String purchase_add_description = product_add_description.getText().toString().trim();
         int purchase_add_qty = Integer.parseInt(product_add_qty.getText().toString());
         int purchase_add_per_price = Integer.parseInt(product_add_per_price.getText().toString());
         int purchase_add_total_price = add_data.getProduct_total_price();
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(purchase_add_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
 
         add_data.setProduct_name(purchase_add_name);
         add_data.setProduct_id(purchase_add_id);
         add_data.setProduct_qty(purchase_add_qty);
         add_data.setProduct_per_price(purchase_add_per_price);
-        add_data.setDate(purchase_add_date);
+        add_data.setProduct_date(date);
         add_data.setProduct_total_price(purchase_add_total_price);
         add_data.setProduct_description(purchase_add_description);
 

@@ -5,39 +5,37 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 public class reports extends AppCompatActivity {
-    Button Expense_tracker,product_list,profit_loss;
-    public DrawerLayout drawerLayout;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
+    Button purchase_expense,product_list,sales_expense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
 
-        Expense_tracker = findViewById(R.id.Expense_reports);
-        Expense_tracker.setOnClickListener(new View.OnClickListener() {
+        purchase_expense = findViewById(R.id.purchase_expense_reports_button);
+        purchase_expense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(reports.this,expense_reports.class));
+                startActivity(new Intent(reports.this,purchase_expense_reports.class));
             }
         });
+
+        sales_expense = findViewById(R.id.sales_expense_reports_button);
+        sales_expense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(reports.this,sales_expense_reports.class));
+            }
+        });
+
         product_list = findViewById(R.id.Products_reports);
         product_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(reports.this,product_reports.class));
-            }
-        });
-        profit_loss = findViewById(R.id.Profit_Loss);
-        profit_loss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(reports.this,profit_loss.class));
             }
         });
 

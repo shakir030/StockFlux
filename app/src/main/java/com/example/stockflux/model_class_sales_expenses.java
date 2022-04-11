@@ -1,12 +1,24 @@
 package com.example.stockflux;
 
+import java.util.Date;
+
 public class model_class_sales_expenses {
-    String Name,Date,Description;
+    String Name,Description;
+    Date Date;
     int Total_Price;
 
-    model_class_sales_expenses(){
+    public model_class_sales_expenses(){
 
     }
+
+    public model_class_sales_expenses(String name, Date date, String description, int total_Price) {
+        Name = name;
+        Date = date;
+        Description = description;
+        Total_Price = total_Price;
+    }
+
+
 
     public String getName() {
         return Name;
@@ -16,11 +28,11 @@ public class model_class_sales_expenses {
         Name = name;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return Date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         Date = date;
     }
 

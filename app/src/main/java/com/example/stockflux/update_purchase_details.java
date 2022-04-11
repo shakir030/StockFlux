@@ -113,7 +113,7 @@ public class update_purchase_details extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        startActivity(new Intent(update_purchase_details.this,activity_view.class));
+                        startActivity(new Intent(update_purchase_details.this, purchase_view.class));
                         Toast.makeText(update_purchase_details.this, "Updated", Toast.LENGTH_SHORT).show();
                     }
                 });
