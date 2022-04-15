@@ -1,6 +1,7 @@
 package com.example.stockflux;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +65,11 @@ public class update_purchase_details extends AppCompatActivity {
         product_update_name.setEnabled(false);
         product_update_id.setEnabled(false);
         product_update_total_price.setEnabled(false);
+
+        product_update_name.setTextColor(Color.GRAY);
+        product_update_id.setTextColor(Color.GRAY);
+        product_update_total_price.setTextColor(Color.GRAY);
+
 
         firestore_database = FirebaseFirestore.getInstance();
         update_button = findViewById(R.id.submit_update_button);

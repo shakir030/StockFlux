@@ -93,7 +93,7 @@
             android:name=".update_purchase_details"
             android:exported="false"
             android:label="Update Purchase Details"
-            android:parentActivityName=".activity_view" />
+            android:parentActivityName=".purchase_view" />
         <activity
             android:name=".activity_sales_home"
             android:exported="false"

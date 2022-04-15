@@ -1,6 +1,7 @@
 package com.example.stockflux;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +74,9 @@ public class update_sales_details extends AppCompatActivity {
         sales_update_name.setEnabled(false);
         sales_update_id.setEnabled(false);
 
+        sales_update_name.setTextColor(Color.GRAY);
+        sales_update_id.setTextColor(Color.GRAY);
+
         fStoreUpdate = FirebaseFirestore.getInstance();
         fPurchaseDetails = FirebaseFirestore.getInstance();
 
@@ -115,7 +119,7 @@ public class update_sales_details extends AppCompatActivity {
                     sales_update_qty.requestFocus();
                     return;
                 }
-                Query query = fPurchaseDetails.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_name",sales_name).whereEqualTo("product_id",purchase_id);
+                Query query = fPurchaseDetails.collection("Users").document(user_id).collection("addProducts").whereEqualTo("product_id",purchase_id);
                 query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

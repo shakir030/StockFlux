@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +27,7 @@ import java.util.Date;
 public class activity_add extends AppCompatActivity {
     public static final String TAG = "AddPurchase";
     private TextInputEditText product_add_name,product_add_id,product_add_qty,product_add_per_price,product_add_total_price,product_add_description;
-    private TextView product_add_date ;
+    private TextInputEditText product_add_date ;
     private Button add_purchase_submit_button,add_purchase_reset_button;
     private DatePickerDialog datePickerDialog;
     private FirebaseFirestore db;

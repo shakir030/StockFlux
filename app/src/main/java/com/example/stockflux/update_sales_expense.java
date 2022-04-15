@@ -1,6 +1,7 @@
 package com.example.stockflux;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,8 @@ public class update_sales_expense extends AppCompatActivity {
         sales_expense_update_description.setText(update_description);
 
         sales_expense_update_name.setEnabled(false);
+        sales_expense_update_name.setTextColor(Color.GRAY);
+
         fS_expense_update = FirebaseFirestore.getInstance();
 
         sales_expense_update_reset = findViewById(R.id.sales_reset_update_button);

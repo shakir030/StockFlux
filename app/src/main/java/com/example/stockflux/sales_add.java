@@ -1,6 +1,7 @@
 package com.example.stockflux;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +32,7 @@ import java.util.Date;
 public class sales_add extends AppCompatActivity {
     public static final String TAG = "AddSales";
     TextInputEditText product_add_name, product_add_id, product_add_qty,product_add_per_price,product_add_total_price, product_add_description;
-    TextView product_add_date,total_qty;
+    TextInputEditText product_add_date,total_qty;
     Spinner spinner_list_name;
     Button sales_add_submit_button, sales_add_reset_button, search_button_sales,add_name_button;
     DatePickerDialog datePickerDialog;
@@ -60,7 +60,7 @@ public class sales_add extends AppCompatActivity {
         product_add_description = findViewById(R.id.sales_add_description);
         spinner_list_name = findViewById(R.id.spinner_add_view_purchase);
         search_button_sales = findViewById(R.id.search_button_sales);
-        total_qty = findViewById(R.id.total_qty);
+        total_qty = findViewById(R.id.total_qty_data);
         add_name_button = findViewById(R.id.search_name_product);
         sales_add_submit_button = findViewById(R.id.sales_add_add_button);
 
@@ -255,6 +255,7 @@ public class sales_add extends AppCompatActivity {
 
                         int product_qty = data_view.getProduct_qty();
                         total_qty.setText(String.valueOf(product_qty));
+                        total_qty.setTextColor(Color.GRAY);
 
                     }
                 }
