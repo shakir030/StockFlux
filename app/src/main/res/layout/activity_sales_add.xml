@@ -223,7 +223,6 @@
                 android:hint="Description"
                 app:counterEnabled="true"
                 app:counterMaxLength="200"
-                app:endIconMode="clear_text"
                 app:helperTextEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText

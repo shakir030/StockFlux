@@ -20,12 +20,11 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/purchase_add_name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="395dp"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="50dp"
                 android:hint="Product name"
-                app:endIconMode="clear_text"
                 app:startIconTint="#ff8300"
                 app:startIconDrawable="@drawable/ic_icons8_product_50">
 
@@ -33,7 +32,6 @@
                     android:id="@+id/purchase_add_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
                     android:textSize="20sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -41,12 +39,11 @@
                 android:id="@+id/purchase_add_product_id_layout"
                 android:layout_below="@id/purchase_add_name_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="395dp"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="25dp"
                 android:hint="Purchase order ID#"
-                app:endIconMode="clear_text"
                 app:startIconTint="#ff8300"
                 app:startIconDrawable="@drawable/ic_icons8_contact_24">
 
@@ -54,7 +51,6 @@
                     android:id="@+id/purchase_add_product_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
                     android:textSize="20sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -64,7 +60,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="25dp"
                 android:hint="QTY">
@@ -73,7 +68,6 @@
                     android:id="@+id/purchase_add_qty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
                     android:inputType="number"
                     android:textSize="20sp" />
 
@@ -86,7 +80,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
                 android:hint=" Per/Price">
@@ -95,7 +88,6 @@
                     android:id="@+id/purchase_add_per_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
                     android:inputType="number"
                     android:textSize="20sp" />
 
@@ -148,7 +140,7 @@
                 android:id="@+id/purchase_add_description_layout"
                 android:layout_below="@id/purchase_add_date_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="375dp"
+                android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"

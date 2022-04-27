@@ -29,7 +29,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="50dp"
                 android:hint="Expense Name"
-                app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/expense_logo"
                 app:startIconTint="#ff8300">
 
