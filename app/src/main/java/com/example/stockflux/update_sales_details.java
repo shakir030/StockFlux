@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,9 +21,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class update_sales_details extends AppCompatActivity {
     public static final String TAG = "Addsales";
-    private TextInputEditText sales_update_name,sales_update_id,sales_update_qty,sales_update_per_price,sales_update_discription;
+    private TextInputEditText sales_update_name,sales_update_id,sales_update_qty,sales_update_per_price,sales_update_discription,total_qty_update;
     private Button sales_update_button,sales_reset_button;
-    TextView total_qty_update;
     public FirebaseFirestore fStoreUpdate,fPurchaseDetails;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     String user_id = fAuth.getCurrentUser().getUid();

@@ -5,8 +5,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,10 +77,38 @@ public class user_account extends AppCompatActivity {
                 String update_number = number_profile.getText().toString().trim();
                 String update_business = business_profile.getText().toString().trim();
 
+
+                if(update_name.isEmpty()){
+                    first_name_profile.setError("Enter Name !!");
+                    first_name_profile.requestFocus();
+                    return;
+                }
+                if(update_number.isEmpty()){
+                    number_profile.setError("Enter Number !!");
+                    number_profile.requestFocus();
+                    return;
+                }
+                if(update_business.isEmpty()){
+                    business_profile.setError("Enter Number !!");
+                    business_profile.requestFocus();
+                    return;
+                }
+                if(update_number.length() != 10){
+                    number_profile.setError("Enter 10 Digits number !!");
+                    number_profile.requestFocus();
+                    return;
+
+                }
+
                 fProfile.collection("Users").document(user_id).collection("UsersData").document(profile_document_id).update("fullname",update_name,"number",update_number,"businessname",update_business).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(user_account.this, "Details Updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(user_account.this, "OnFailure :- "+e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             }

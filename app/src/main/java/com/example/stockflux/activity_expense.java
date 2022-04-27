@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,8 +26,7 @@ import java.util.Date;
 
 public class activity_expense extends AppCompatActivity {
     public static final String TAG = "AddPurchaseExpenses";
-    TextInputEditText purchase_expense_name,purchase_expense_total_price,purchase_expense_description;
-    TextView purchase_expense_date;
+    TextInputEditText purchase_expense_name,purchase_expense_total_price,purchase_expense_description,purchase_expense_date;
     Button purchase_expense_submit,purchase_expense_reset;
     DatePickerDialog datePickerDialog;
     FirebaseFirestore fAddExpense;
